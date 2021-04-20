@@ -7,12 +7,12 @@ import java.io.IOException;
 public class Plane {
     public double x;
     public double y;
-    public double y0;
-    public double v=7;
-    public double r=40;
-    public double t;
+    private double y0;
+    private double v=7;
+    private double r=40;
+    private double t;
     public int f=1;
-    public int ff=1;
+    private int ff=1;
     public double xstroke=-1;
     public int health=15;
     public Bomb bomb=new Bomb();
@@ -58,7 +58,7 @@ public class Plane {
 
 
     };
-    public void drawhealth (Graphics g ){
+    public void drawHealth(Graphics g ){
         g.setColor(Color.GRAY);
         g.fillRect((int)(x-30),((int)(y)-50),180,20);
         g.setColor(Color.RED);

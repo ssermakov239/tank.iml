@@ -7,15 +7,15 @@ import java.io.IOException;
 public class Bomb {
     public double x;
     public double y;
-    public double x0;
-    public double y0;
-    public double vx;
-    public double vy;
-    public double vx0;
-    public double G =10;
-    public double m = 1;
-    public double k =0.1;
-    public double dt;
+    private double x0;
+    private double y0;
+    private double vx;
+    private double vy;
+    private double vx0;
+    private double G =10;
+    private double m = 1;
+    private double k =0.1;
+    private double dt;
     BufferedImage bombImage;
     public Bomb(){};
     public void initialize(double xx, double yy, double vv) throws IOException {

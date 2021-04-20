@@ -7,22 +7,22 @@ import java.io.File;
 import java.io.IOException;
 
 public class Enemyball {
-    public double v=250;
-    public double angle=Math.atan(200/150.0);
-    public double vx=150;  //можно увеличивать массу, уменьшать скорости , увеличивать dt , тогда
+    private double v=250;
+    private double angle=Math.atan(200/150.0);
+    private double vx=150;  //можно увеличивать массу, уменьшать скорости , увеличивать dt , тогда
     public double vy=200;  // полёт будет более плавным, траектория будет приближаться  параболе - теперь уже не надо
     public double x=100;
-    public double x0=x;
+    private double x0=x;
     public double xstroke=-1;
     public double y=100;
     public double y0=y;
     public double vx0=vx;
     public double vy0=vy;
-    public double dt = 0.02;
-    public double G =10;
+    private double dt = 0.02;
+    private double G =10;
     public double m = 1;
     public double k =0.2;
-    public int f=0;
+    private int f=0;
     BufferedImage bulletImage;
 
     public Enemyball(){};
@@ -51,6 +51,8 @@ public class Enemyball {
             xstroke=x;
             f=1;
         } else {xstroke=-100000; if (Math.abs(y-ymin)>2.5) {f=0;}};
+
+
         //System.out.println(y+" "+y0);
         //System.out.println(y+" "+x+" "+dt);
         /*if (x>1500||y<0){

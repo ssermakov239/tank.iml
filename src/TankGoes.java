@@ -27,7 +27,7 @@ public class TankGoes {
         String strFilename = filename;
 
         try {
-            soundFile = new File("src/neiz_esten-z_uk-tanka.wav");
+            soundFile = new File("src/soundtankgo.wav");
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
