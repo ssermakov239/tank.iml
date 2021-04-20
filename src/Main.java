@@ -12,8 +12,7 @@ public class Main {
         Panel panel = new Panel();
         frame.add(panel);
         frame.setVisible(true);
-
-        while (true) {
+        while (panel.frameClose) {
             frame.repaint();
            // new TankFires().playSound("bip.wav");
           //  if (panel.f==0){
@@ -21,6 +20,7 @@ public class Main {
 
 
         }
+        System.exit(1);
 
     }
 }

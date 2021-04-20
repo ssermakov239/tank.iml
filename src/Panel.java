@@ -10,52 +10,58 @@ import java.io.File;
 import java.io.IOException;
 
 public class Panel extends JPanel implements MouseListener, MouseMotionListener {
-    public Ball ball = new Ball();
-    public Tank tank = new Tank();
-    public Enemytank enemytank = new Enemytank();
-    public Plane plane = new Plane();
-    //public Enemyball enemyball=new Enemyball();
-    public int f = 5;
-    public int f1 = 3;
-    public int enemyboom = 0;
-    public int enemyboomdirection = 0;
-    public int planeboomdirection = 0;
-    public double enemyboomr3 = 0;
-    public int time = 0;
-    public int timewin = 0;
-    public int n = 0;
-    int planestroke = 0;
-    public int moveright = 0;
-    public int tankgo=0;
-    public int tankgof=0;
-    public int moveleft = 0;
-    public int vplus = 0;
-    public int vminus = 0;
-    public int angleplus = 0;
-    public int angleminus = 0;
-    public int enemyballdirection = -1;
-    public int balldirection = -1;
-    public int numberOfTheLevel = -1;
-    public int timestudy = -1;
-    public int timelevel1 = -1;
-    public int timelevel2 = -1;
-    public int timelevel3=-1;
-    public int timetraektory = -1;
-    public int threebegin = 0;
-    public int shootbuttonmoved=0;
-    public int f3=1;
-    public int studyf=0;
-    public int finishstudyf=0;
-    public int goto2level=0;
-    public  int goto3level=0;
-    public int showtraektorybuttonmoved=0;
-    public long previoustime;
-    public long currenttime;
-    public long deltatime;
-    public double boomr = 0;
-    public double enemyboomr = 0;
-    public double planeboom = 0;
-    public TankGoes sound1=new TankGoes();
+    private Ball ball = new Ball();
+    private Tank tank = new Tank();
+    private Enemytank enemytank = new Enemytank();
+    private Plane plane = new Plane();
+    public boolean frameClose =true;
+    private int f = 5;
+    private int f1 = 3;
+    private int ifTankShooting =0;
+    private int EnemyBoom = 0;
+    private int enemyBoomDirection = 0;
+    private int planeBoomDirection = 0;
+    private double enemyBoomR3 = 0;
+    private int time = 0;
+    private int timeWin = 0;
+    private int planeStroke = 0;
+    private int moveRight = 0;
+    private int tankGo =0;
+    private int tankGof =0;
+    private int moveLeft = 0;
+    private int vPlus = 0;
+    private int vMinus = 0;
+    private int anglePlus = 0;
+    private int angleMinus = 0;
+    private int enemyBallDirection = -1;
+    private int ballDirection = -1;
+    private int numberOfTheLevel = -1;
+    private int timeStudy = -1;
+    private int timeLevel1 = -1;
+    private int timeLevel2 = -1;
+    private int timeLevel3 =-1;
+    private double timeLevel4=-1;
+    private int timeTrajectory = -1;
+    private int threeBegin = 0;
+    private int shootButtonMoved =0;
+    private int yesMouseMoved=0;
+    private int noMouseMoved=0;
+    private int f3=1;
+    private int studyF =0;
+    private int finishStudyF =0;
+    private int goto2level=0;
+    private  int goto3level=0;
+    private int howManyTimesIWon=0;
+    private int showTrajectoryButtonMoved =0;
+    private long previousTime;
+    private long currentTime;
+    private long deltaTime;
+    private double boomR = 0;
+    private double enemyBoomR = 0;
+    private double planeBoom = 0;
+    private final TankGoes sound1=new TankGoes();
+    private final AirBombExplodes soundBomb=new AirBombExplodes();
+    private final EnemyTankGoes enemyTankGo = new EnemyTankGoes();
     BufferedImage dieImage;
     BufferedImage winImage;
     BufferedImage studyImage;
@@ -70,23 +76,28 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
     BufferedImage beginStudy;
     BufferedImage beginStudyMouseMoved;
     BufferedImage shootImage;
-    BufferedImage showTrektoryImage;
-    BufferedImage shootmousemovedImage;
+    BufferedImage showTrajectoryImage;
+    BufferedImage shootMouseMovedImage;
     BufferedImage shootMouseClickedImage;
-    BufferedImage showTraektoryMouseMovedImage;
-    BufferedImage showTraektoryMouseClickedImage;
-    BufferedImage finishstudy;
+    BufferedImage showTrajectoryMouseMovedImage;
+    BufferedImage showTrajectoryMouseClickedImage;
+    BufferedImage finishStudy;
     BufferedImage finishStudyMouseMoved;
     BufferedImage GoTo2Level;
     BufferedImage GoTo2LevelMouseMoved;
     BufferedImage GoTo3Level;
     BufferedImage GoTo3LevelMouseMoved;
-    BufferedImage Kursk;
+    BufferedImage KurskImage;
     BufferedImage Leningrad;
     BufferedImage Stalingrad;
     BufferedImage MapKursk;
     BufferedImage MapLeningrad;
     BufferedImage MapStalingrad;
+    BufferedImage FinalImage;
+    BufferedImage Yesimage;
+    BufferedImage YesMouseMovedImage;
+    BufferedImage NoImage;
+    BufferedImage NoMouseMovedImage;
     BufferedImage floor;
     BufferedImage floor1;
 
@@ -102,133 +113,123 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
         this.addMouseMotionListener(this);
         dieImage = ImageIO.read(new File("src/image-created.png"));
         winImage = ImageIO.read((new File("src/477-4772900_icon-you-win-graphic-design-hd-png-download.png")));
-        studyImage = ImageIO.read(new File("src/ы1.png"));
+        studyImage = ImageIO.read(new File("src/обучение01.png"));
         study1Image = ImageIO.read(new File("src/инфа1.png"));
-        level1Image = ImageIO.read(new File("src/уровень1.png"));
+        level1Image = ImageIO.read(new File("src/обучение01.png"));
         level2Image = ImageIO.read(new File("src/ы (1).png"));
         level1backgroundImage = ImageIO.read(new File("src/imgonline-com-ua-Resize-LdS3Mu9x4idZoD9.png"));
         level2backgroundImage = ImageIO.read(new File(/*"src/scale_1200.png"*/"src/немецкий бомбардировщик.jpg"));
         level3backgroundImage = ImageIO.read(new File("src/3background.png"));
         level0background = ImageIO.read(new File("src/level0background.png"));
         shootImage=ImageIO.read(new File("src/shootpng1.png"));
-        shootmousemovedImage=ImageIO.read(new File("src/shootmousemoved2.png"));
+        shootMouseMovedImage =ImageIO.read(new File("src/shootmousemoved2.png"));
         shootMouseClickedImage=ImageIO.read(new File("src/shootmouseclicked2.png"));
-        showTrektoryImage=ImageIO.read(new File("src/showtraektorypng1.png"));
-        showTraektoryMouseMovedImage=ImageIO.read(new File("src/showtraektorymousemoved2.png"));
-        showTraektoryMouseClickedImage=ImageIO.read(new File("src/showtraektorymouseclicked2.png"));
+        showTrajectoryImage =ImageIO.read(new File("src/showtraektorypng1.png"));
+        showTrajectoryMouseMovedImage =ImageIO.read(new File("src/showtraektorymousemoved2.png"));
+        showTrajectoryMouseClickedImage =ImageIO.read(new File("src/showtraektorymouseclicked2.png"));
         beginStudy=ImageIO.read(new File("src/beginstudy.png"));
         beginStudyMouseMoved=ImageIO.read(new File("src/beginstudymousemoved.png"));
         floor =ImageIO.read(new File("src/level0background0000.png"));
         floor1=ImageIO.read(new File("src/level0background11111.png"));
-        finishstudy=ImageIO.read(new File("src/finishstudy.png"));
+        finishStudy =ImageIO.read(new File("src/finishstudy.png"));
         finishStudyMouseMoved=ImageIO.read(new File("src/finishstudymousemoved.png"));
         GoTo2Level=ImageIO.read(new File("src/goto2level.png"));
         GoTo2LevelMouseMoved=ImageIO.read(new File("src/goto2levelmousemoved.png"));
         GoTo3Level=ImageIO.read(new File("src/goto3level.png"));
         GoTo3LevelMouseMoved=ImageIO.read(new File("src/goto3levelmousemoved.png"));
-        Kursk=ImageIO.read(new File("src/Курская битва.jpg"));
+        KurskImage =ImageIO.read(new File("src/Курская битва.jpg"));
         Leningrad=ImageIO.read(new File("src/Битва за Ленинград.jpg"));
         Stalingrad=ImageIO.read(new File("src/Сталинградская битва 2.jpg"));
         level3Image=ImageIO.read(new File("src/уровень 3 1.png"));
         MapKursk=ImageIO.read(new File("src/карта ссср курск.jpg"));
         MapLeningrad=ImageIO.read(new File("src/карта ссср ленинград.jpg"));
         MapStalingrad=ImageIO.read(new File("src/карта ссср сталинград.jpg"));
+        FinalImage=ImageIO.read(new File("src/советский флаг над рейхстагом фото.jpg"));
+        Yesimage=ImageIO.read(new File("src/да.png"));
+        YesMouseMovedImage=ImageIO.read(new File("src/да1.png"));
+        NoImage=ImageIO.read(new File("src/нет.png"));
+        NoMouseMovedImage=ImageIO.read(new File("src/нет1.png"));
     }
 
-    ;
+
 
     @Override
     public void paintComponent(Graphics g) {
-         //numberOfTheLevel=3;                                      //надо будет потом убрать!!!!
-        currenttime = System.currentTimeMillis();
-        deltatime = currenttime - previoustime;
-        previoustime = currenttime;
-        if (numberOfTheLevel == -1 || timestudy >= 0) {
-            if (timestudy >= 0 && timestudy <= 200) {
+         //numberOfTheLevel=4;                                                            //надо будет потом убрать!!!!
+        currentTime = System.currentTimeMillis();
+        deltaTime = currentTime - previousTime;
+        previousTime = currentTime;
+        if (numberOfTheLevel == -1 || timeStudy >= 0) {
+            if (timeStudy >= 0 && timeStudy <= 200) {
                 g.drawImage(study1Image, 100, 0, 1131, 1600, null);
-                timestudy -= deltatime/5.0;
+                timeStudy -= deltaTime /5.0;
             } else {
                 g.drawImage(studyImage, 0, 0, 1425, 600, null);
                 g.setColor(Color.BLACK);
                 g.drawImage(beginStudy,50,500,272,60,null);
-                if (studyf==1){
+                if (studyF ==1){
                     g.drawImage(beginStudyMouseMoved,50,500,272,60,null);
                 }
-                //g.drawRect(50, 500, 200, 20);
-               // g.drawString("Начать обучение", 55, 513);
+
             }
-        } else if (numberOfTheLevel == 0 || timelevel1 >= 0) {                                                              //0 level started
-            if (timelevel1 >= 0 && timelevel1 <= 800) {
-                if (timelevel1>=680) {
-                g.drawImage(level1Image, 100, 0, 1131, 1600, null);}
-                else {g.drawImage(Kursk,600,0,882,740,null);
+        }
+        else if (numberOfTheLevel == 0 || timeLevel1 >= 0) {                                                              //0 level started
+            if (timeLevel1 >= 0 && timeLevel1 <= 800) {
+                if (timeLevel1 >=680) {
+                g.drawImage(level1Image, 100, 0, 1131, 1600, null); }
+                else {g.drawImage(KurskImage,600,0,882,740,null);
                 g.drawImage(MapKursk,0,0,592,740,null);}
-                timelevel1 -= deltatime / 6.5;
+                timeLevel1 -= deltaTime / 6.5;
                 enemytank.enemyball.vy = -1;
                 enemytank.enemyball.y = -1;
+                if (Math.abs(timeLevel1-5)<2.0){
+                    new Thread(() -> {
+                        enemyTankGo.playSound("h");
+                    }).start();
+                }
+
             } else {
                 g.drawImage(level0background, 0, 0, 1500, 800, null);
                 g.setColor(Color.BLACK);
                 g.drawImage(shootImage,50,15,110,40,null);
-                g.drawImage(showTrektoryImage,50,58,180,40,null);
-                g.drawImage(finishstudy,50,150,187,40,null);
-                if (shootbuttonmoved==1){
-                   /* Color color = new Color(0, 152, 253, 42);
-                    g.setColor(color);
-                    g.fillRect(50, 20, 100, 20);
-                    g.setColor(Color.BLACK);*/
-                    g.drawImage(shootmousemovedImage,50,15,110,40,null);
+                g.drawImage(showTrajectoryImage,50,58,180,40,null);
+                g.drawImage(finishStudy,50,150,187,40,null);
+                if (shootButtonMoved ==1){
+                    g.drawImage(shootMouseMovedImage,50,15,110,40,null);
                 }
-                if (shootbuttonmoved==2){
-                    /*Color color = new Color(0, 122, 253, 232);
-                    g.setColor(color);
-                    g.fillRect(50, 20, 100, 20);
-                    g.setColor(Color.BLACK);*/
+                if (shootButtonMoved ==2){
                     g.drawImage(shootMouseClickedImage,50,15,110,40,null);
                     f3=1;
                 }
-                //g.drawRect(50, 20, 100, 20);
-               // g.drawString("Стрелять", 55, 33);
 
-                if (showtraektorybuttonmoved==1&&f3==1){
-                    /*Color color = new Color(0, 152, 253, 42);
-                    g.setColor(color);
-                    g.fillRect(50, 50, 130, 20);
-                    g.setColor(Color.BLACK);*/
-                    g.drawImage(showTraektoryMouseMovedImage,50,58,180,40,null);
+                if (showTrajectoryButtonMoved ==1&&f3==1){
+                    g.drawImage(showTrajectoryMouseMovedImage,50,58,180,40,null);
                 } else
                 if (f3==0){
-                    /*Color color = new Color(0, 122, 253, 232);
-                    g.setColor(color);
-                    g.fillRect(50, 50, 130, 20);
-                    g.setColor(Color.BLACK);*/
-                    g.drawImage(showTraektoryMouseClickedImage,50,58,180,40,null);
-                } else if (timetraektory==0){f3=0;}
-                if (timetraektory==400){f3=0;}
-                if (timetraektory==0){f3=1;}
-                if (finishstudyf==1){
+
+                    g.drawImage(showTrajectoryMouseClickedImage,50,58,180,40,null);
+                } else if (timeTrajectory ==0){f3=0;}
+                if (timeTrajectory ==400){f3=0;}
+                if (timeTrajectory ==0){f3=1;}
+                if (finishStudyF ==1){
                     g.drawImage(finishStudyMouseMoved,50,150,187,40,null);
                 }
 
 
 
-                //g.drawRect(50, 50, 130, 20);
-                //g.drawString("Показать траекторию", 55, 63);
+
                 g.setFont(new Font("Impact",Font.PLAIN, 14));
                 g.drawString("Скорость равна=" + (int) (ball.v), 50, 115);
                 g.drawString("Угол равен=" + (int) (ball.angle * 180 / Math.PI), 50, 133);
-                //g.drawString("Закончить обучение", 55, 163);
-                //g.drawRect(50, 150, 140, 20);
                 g.drawString("Обучение", 700, 50);
                 g.setColor(Color.GRAY);
                 //g.fillRect(0, 720, 1500, 80);
                 g.drawImage(floor,0, 720, 1500, 80,null);
 
                 if (f == 1) {
-                    if (timetraektory >= 0) {
+                    if (timeTrajectory >= 0) {
                         ball.drawline(0.001, ball.y, ball.x, ball.y, ball.vx, ball.vy, g, -1);
-                        //System.out.println("jjj"+timetraektory);
-                        timetraektory -= deltatime / 10.0;
+                        timeTrajectory -= deltaTime / 10.0;
                         try {
                             ball.initialize(ball.v, ball.angle, tank.x, (800 - tank.y));
                         } catch (IOException e) {
@@ -236,74 +237,92 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                         }
 
                     }
-                    ;
-                    if (timetraektory == -1) {
+
+                    if (timeTrajectory == -1) {
                         f = -1;
                     }
-                    ;
+
                 }
-                ;
+
                 if (f1 == 1) {
                     if (ball.y >= (750 - tank.y)) {
                         ball.draw(g, -1);
                         //System.out.println("jjj");
-                        ball.update((deltatime / 200.0), ball.y0, -1);
+                        ball.update((deltaTime / 200.0), ball.y0, -1);
                     } else {
-                        if (boomr < 10) {
+
+                        if (boomR < 10) {
                             g.setColor(Color.RED);
-                        } else if (boomr < 20) {
+                        } else if (boomR < 20) {
                             Color color = new Color(250, 102, 4);
                             g.setColor(color);
-                        } else if (boomr < 30) {
+                        } else if (boomR < 30) {
                             g.setColor(Color.ORANGE);
-                        } else if (boomr < 40) {
+                        } else if (boomR < 40) {
                             g.setColor(Color.YELLOW);
                         }
-                        ;
-                        g.fillOval((int) (ball.x + 30 - boomr), (int) (800 - ball.y + 10 - boomr), 2 * (int) (boomr), 2 * (int) (boomr));
-                        if (boomr < 39) {
-                            boomr = boomr + deltatime / 30.0;
-                        } else {
-                            boomr = 0;
-                            f1 = 0;
+                        if (Math.abs(boomR-40)<1.0){
+                            ifTankShooting =0;
                         }
-                        ;
+
+                        g.fillOval((int) (ball.x + 30 - boomR), (int) (800 - ball.y + 10 - boomR), 2 * (int) (boomR), 2 * (int) (boomR));
+                        if (boomR < 39) {
+                            boomR = boomR + deltaTime / 30.0;
+                        } else {
+                            boomR = 0;
+                            f1 = 0;
+
+                        }
+
                     }
                 }
-                ;
-                if (moveright == 1 && tank.x < 1380) {
-                    tank.moveright(deltatime / 10.0);
-                } else if (moveleft == 1 && tank.x > 0) {
-                    tank.moveleft(deltatime / 10.0);
+
+                if (moveRight == 1 && tank.x < 1380) {
+                    tank.moveRight(deltaTime / 10.0);
+                } else if (moveLeft == 1 && tank.x > 0) {
+                    tank.moveLeft(deltaTime / 10.0);
                 }
-                ;
+
                 tank.draw(g, -1,ball.angle);
-                tank.drawhealth(g);
-                sound1.bool=tankgo;
-                if (vplus == 1) {
+                tank.drawHealth(g);
+                if ((moveLeft ==1 || moveRight ==1)&& tankGof ==0){
+                    tankGo =1;
+                new Thread(() -> {
+                    sound1.bool=1;
+                    sound1.playSound("h");
+                }).start();
+                tankGof =1;}
+                if (moveRight ==0&& moveLeft ==0){
+                    tankGo =0;
+                    tankGof =0;
+                    sound1.bool=0;
+                }
+
+                if (vPlus == 1) {
                     ball.v += 0.2;
-                } else if (vminus == 1) {
+                } else if (vMinus == 1) {
                     ball.v -= 0.2;
                 }
-                ;
-                if (angleplus == 1&&ball.angle<=80/180.0*3.1416) {
+
+                if (anglePlus == 1&&ball.angle<=80/180.0*3.1416) {
                     ball.angle = ball.angle + 1 / 1800.0 * Math.PI;
-                } else if (angleminus == 1&&ball.angle>=0/180.0*3.1416) {
+                } else if (angleMinus == 1&&ball.angle>=0/180.0*3.1416) {
                     ball.angle = ball.angle - 1 / 1800.0 * Math.PI;
                 }
                 if (f == 1) {
                     f1 = 0;
                 }
-                ;
+
                 //f = 0;
             }
-        } else if (numberOfTheLevel == 1) {
-            if (timelevel2 >= 0) {
-                if (timelevel2>= 700  ){
+        }
+        else if (numberOfTheLevel == 1) {
+            if (timeLevel2 >= 0) {
+                if (timeLevel2 >= 700  ){
                 g.drawImage(level2Image, 0, 0, 1500, 2121, null);}
                 else {g.drawImage(Leningrad,586,0,876,730,null);
                 g.drawImage(MapLeningrad,0,0,584,730,null);}
-                if (timelevel2 == 0) {
+                if (timeLevel2 == 0) {
                     numberOfTheLevel = 2;
                     try {
                         plane.bomb.initialize(120, 100, 30);
@@ -311,131 +330,96 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                         e.printStackTrace();
                     }
                 }
-                ;
-                timelevel2 -= deltatime / 10.0;
+
+                timeLevel2 -= deltaTime / 10.0;
             } else {
                 g.drawImage(level1backgroundImage, 0, 0, 1500, 800, null);
                 g.setColor(Color.BLACK);                                                                           //1 level started
                 g.drawImage(shootImage,50,15,110,40,null);
-                sound1.bool=tankgo;
-                g.drawImage(showTrektoryImage,50,58,180,40,null);
+                sound1.bool= tankGo;
+                g.drawImage(showTrajectoryImage,50,58,180,40,null);
                 g.drawImage(GoTo2Level,50,140,178,40,null);
                 if (goto2level==1){
                     g.drawImage(GoTo2LevelMouseMoved,50,140,178,40,null);
                 }
-                if (shootbuttonmoved==1){
-                   /* Color color = new Color(0, 152, 253, 42);
-                    g.setColor(color);
-                    g.fillRect(50, 20, 100, 20);
-                    g.setColor(Color.BLACK);*/
-                    g.drawImage(shootmousemovedImage,50,15,110,40,null);
+                if (shootButtonMoved ==1){
+                    g.drawImage(shootMouseMovedImage,50,15,110,40,null);
                 }
-                if (shootbuttonmoved==2){
-                    /*Color color = new Color(0, 122, 253, 232);
-                    g.setColor(color);
-                    g.fillRect(50, 20, 100, 20);
-                    g.setColor(Color.BLACK);*/
+                if (shootButtonMoved ==2){
                     g.drawImage(shootMouseClickedImage,50,15,110,40,null);
                     f3=1;
                 }
-                //g.drawRect(50, 20, 100, 20);
-                // g.drawString("Стрелять", 55, 33);
 
-                if (showtraektorybuttonmoved==1&&f3==1){
-                    /*Color color = new Color(0, 152, 253, 42);
-                    g.setColor(color);
-                    g.fillRect(50, 50, 130, 20);
-                    g.setColor(Color.BLACK);*/
-                    g.drawImage(showTraektoryMouseMovedImage,50,58,180,40,null);
+
+                if (showTrajectoryButtonMoved ==1&&f3==1){
+                    g.drawImage(showTrajectoryMouseMovedImage,50,58,180,40,null);
                 } else
                 if (f3==0){
-                    /*Color color = new Color(0, 122, 253, 232);
-                    g.setColor(color);
-                    g.fillRect(50, 50, 130, 20);
-                    g.setColor(Color.BLACK);*/
-                    g.drawImage(showTraektoryMouseClickedImage,50,58,180,40,null);
-                } else if (timetraektory==0){f3=0;}
-                if (timetraektory==400){f3=0;}
-                if (timetraektory==0){f3=1;}
+                    g.drawImage(showTrajectoryMouseClickedImage,50,58,180,40,null);
+                } else if (timeTrajectory ==0){f3=0;}
+                if (timeTrajectory ==400){f3=0;}
+                if (timeTrajectory ==0){f3=1;}
 
 
-                //g.drawRect(50, 50, 130, 20);
-                //g.drawString("Показать траекторию", 55, 63);
+
                 g.setFont(new Font("Impact",Font.PLAIN, 14));
                 g.drawString("Скорость равна=" + (int) (ball.v), 50, 115);
                 g.drawString("Угол равен=" + (int) (ball.angle * 180 / Math.PI), 50, 133);
-                //g.drawRect(50, 140, 140, 20);
-                //g.drawString("Перейти на 2 уровень", 55, 153);
                 g.setColor(Color.GRAY);
-                //g.fillRect(0, 720, 1500, 80);
                 g.drawImage(floor,0,720,1500,80,null);
-                //enemyball.draw(g);
-                //enemyball.update(0.03);
                 if (tank.x < enemytank.x) {
                     enemytank.draw(g, 1);
                 } else {
                     enemytank.draw(g, -1);
                 }
-                ;
+
                 enemytank.drawhealth(g);
                 if ((int) (ball.xstroke) >= (enemytank.x/*-10*/) && (int) (ball.xstroke) <= (enemytank.x + 120/*+130*/)) {
                     enemytank.health -= 1;
-                    //System.out.println(tank.health);
                 }
-                ;
-                if (Math.abs(enemytank.enemyball.y - enemytank.enemyball.y0 + 60) < 3.5 && enemytank.enemyball.y != enemytank.enemyball.y0/*&&Math.abs(enemytank.enemyball.x - enemytank.enemyball.x0) > 5.0*/) {
+
+                if (Math.abs(enemytank.enemyball.y - enemytank.enemyball.y0 + 60) < 3.5 && enemytank.enemyball.y != enemytank.enemyball.y0) {
                     if (tank.x < enemytank.x) {
-                        enemyballdirection = -1;
+                        enemyBallDirection = -1;
                     } else {
-                        enemyballdirection = 1;
+                        enemyBallDirection = 1;
                     }
-                    ;
+
                 }
-                ;
-            /*if (Math.abs(ball.y-ball.y0)<2.5&&ball.y!=ball.y0){
-                if (tank.x<enemytank.x){
-                    balldirection=-1;
-                }
-                else {
-                    balldirection=1;
-                };
-            };*/
+
+
                 if (enemytank.enemyball.xstroke > 0) {
-                    enemyboom = 1;
+                    EnemyBoom = 1;
                     enemytank.enemyball.xstroke = -10000;
-                    enemyboomdirection = enemyballdirection;
+                    enemyBoomDirection = enemyBallDirection;
                 }
-                ;
-                if (enemyboom == 1) {
-                    if (enemyboomr < 10) {
+
+                if (EnemyBoom == 1) {
+                    if (enemyBoomR < 10) {
                         g.setColor(Color.RED);
-                    } else if (enemyboomr < 20) {
+                    } else if (enemyBoomR < 20) {
                         Color color = new Color(250, 102, 4);
                         g.setColor(color);
-                    } else if (enemyboomr < 30) {
+                    } else if (enemyBoomR < 30) {
                         g.setColor(Color.ORANGE);
-                    } else if (enemyboomr < 40) {
+                    } else if (enemyBoomR < 40) {
                         g.setColor(Color.YELLOW);
                     }
-                    ;
-                    //if (boomr==0&&tank.x<enemytank.x) {boomdirection=1;} else if (boomr==0&&tank.x>enemytank.x) {boomdirection=-1;};
-                    if (enemyboomdirection == -1) {
-                        g.fillOval((int) (enemytank.enemyball.x + 30 - enemyboomr), (int) (800 - enemytank.enemyball.y + 10 - enemyboomr), 2 * (int) (enemyboomr), 2 * (int) (enemyboomr));
+
+
+                    g.fillOval((int) (enemytank.enemyball.x + 30 - enemyBoomR), (int) (800 - enemytank.enemyball.y + 10 - enemyBoomR), 2 * (int) (enemyBoomR), 2 * (int) (enemyBoomR));
+                    if (enemyBoomR < 39) {
+                        enemyBoomR = enemyBoomR + deltaTime / 30.0;
                     } else {
-                        g.fillOval((int) (enemytank.enemyball.x + 30 - enemyboomr), (int) (800 - enemytank.enemyball.y + 10 - enemyboomr), 2 * (int) (enemyboomr), 2 * (int) (enemyboomr));
+                        enemyBoomR = 0;
+                        EnemyBoom = 0;
                     }
-                    if (enemyboomr < 39) {
-                        enemyboomr = enemyboomr + deltatime / 30.0;
-                    } else {
-                        enemyboomr = 0;
-                        enemyboom = 0;
-                    }
-                    ;
+
                 }
-                ;
+
                 try {
-                    if (enemyboom == 0) {
-                        enemytank.shoot(deltatime / 200.0, tank.x, 82, g, enemyballdirection);
+                    if (EnemyBoom == 0) {
+                        enemytank.shoot(deltaTime / 200.0, tank.x, 82, g, enemyBallDirection);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -444,18 +428,18 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                     tank.health -= 1;
                     //System.out.println(tank.health);
                 }
-                ;
+
                 if (tank.x < enemytank.x) {
-                    enemytank.move(deltatime / 20.0, tank.x, -1);
+                    enemytank.move(deltaTime / 20.0, tank.x, -1);
                 } else {
-                    enemytank.move(deltatime / 20.0, tank.x, 1);
+                    enemytank.move(deltaTime / 20.0, tank.x, 1);
                 }
-                ;
+
                 if (f == 1) {
-                    if (timetraektory >= 0) {
-                        ball.drawline(0.05, ball.y, ball.x, ball.y, ball.vx, ball.vy, g, balldirection);
-                        //System.out.println("jjj"+timetraektory);
-                        timetraektory -= deltatime / 10.0;
+                    if (timeTrajectory >= 0) {
+                        ball.drawline(0.05, ball.y, ball.x, ball.y, ball.vx, ball.vy, g, ballDirection);
+
+                        timeTrajectory -= deltaTime / 10.0;
                         try {
                             ball.initialize(ball.v, ball.angle, tank.x, (800 - tank.y));
                         } catch (IOException e) {
@@ -463,96 +447,113 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                         }
 
                     }
-                    ;
-                    if (timetraektory == -1) {
+
+                    if (timeTrajectory == -1) {
                         f = -1;
                     }
-                    ;
+
                 }
-                ;
+
                 if (f1 == 1) {
                     if (ball.y >= (750 - tank.y)) {
-                        ball.draw(g, balldirection);
-                        ball.update(deltatime / 200.0, ball.y0, balldirection);
+                        ball.draw(g, ballDirection);
+                        ball.update(deltaTime / 200.0, ball.y0, ballDirection);
                     } else {
                         ball.xstroke = -10000;
-                        if (boomr < 10) {
+                        if (boomR < 10) {
                             g.setColor(Color.RED);
-                        } else if (boomr < 20) {
+                        } else if (boomR < 20) {
                             Color color = new Color(250, 102, 4);
                             g.setColor(color);
-                        } else if (boomr < 30) {
+                        } else if (boomR < 30) {
                             g.setColor(Color.ORANGE);
-                        } else if (boomr < 40) {
+                        } else if (boomR < 40) {
                             g.setColor(Color.YELLOW);
                         }
-                        ;
-                        //if (boomr==0&&tank.x<enemytank.x) {boomdirection=1;} else if (boomr==0&&tank.x>enemytank.x) {boomdirection=-1;};
-                        if (balldirection == -1) {
-                            g.fillOval((int) (ball.x + 30 - boomr), (int) (800 - ball.y + 10 - boomr), 2 * (int) (boomr), 2 * (int) (boomr));
-                        } else {
-                            g.fillOval((int) (ball.x - 80 - boomr), (int) (800 - ball.y + 10 - boomr), 2 * (int) (boomr), 2 * (int) (boomr));
+                        if (Math.abs(boomR-40)<1.0){
+                            ifTankShooting =0;
                         }
-                        if (boomr < 39) {
-                            boomr = boomr + deltatime / 30.0;
+
+
+                        if (ballDirection == -1) {
+                            g.fillOval((int) (ball.x + 30 - boomR), (int) (800 - ball.y + 10 - boomR), 2 * (int) (boomR), 2 * (int) (boomR));
                         } else {
-                            boomr = 0;
+                            g.fillOval((int) (ball.x - 80 - boomR), (int) (800 - ball.y + 10 - boomR), 2 * (int) (boomR), 2 * (int) (boomR));
+                        }
+                        if (boomR < 39) {
+                            boomR = boomR + deltaTime / 30.0;
+                        } else {
+                            boomR = 0;
                             f1 = 0;
                         }
-                        ;
+
                     }
                 }
-                ;
-                if (moveright == 1 && tank.x < 1380) {
-                    tank.moveright(deltatime / 10.0);
-                } else if (moveleft == 1 && tank.x > 0) {
-                    tank.moveleft(deltatime / 10.0);
+
+                if (moveRight == 1 && tank.x < 1380) {
+                    tank.moveRight(deltaTime / 10.0);
+                } else if (moveLeft == 1 && tank.x > 0) {
+                    tank.moveLeft(deltaTime / 10.0);
                 }
-                ;
+
+                if ((moveLeft ==1 || moveRight ==1)&& tankGof ==0){
+                    tankGo =1;
+                    new Thread(() -> {
+                        sound1.bool=1;
+                        sound1.playSound("h");
+                    }).start();
+                    tankGof =1;}
+                if (moveRight ==0&& moveLeft ==0){
+                    tankGo =0;
+                    tankGof =0;
+                    sound1.bool=0;
+                }
                 if ((tank.x < enemytank.x)) {
                     tank.draw(g, -1,ball.angle);
                 } else {
                     tank.draw(g, 1,ball.angle);
                 }
-                ;
-                tank.drawhealth(g);
-                if (vplus == 1) {
+
+                tank.drawHealth(g);
+                if (vPlus == 1) {
                     ball.v += 0.2;
-                } else if (vminus == 1) {
+                } else if (vMinus == 1) {
                     ball.v -= 0.2;
                 }
-                ;
-                if (angleplus == 1&&ball.angle<=80/180.0*3.1416) {
+
+                if (anglePlus == 1&&ball.angle<=80/180.0*3.1416) {
                     ball.angle = ball.angle + 1 / 1800.0 * Math.PI;
-                } else if (angleminus == 1&&ball.angle>=0/180.0*3.1416) {
+                } else if (angleMinus == 1&&ball.angle>=0/180.0*3.1416) {
                     ball.angle = ball.angle - 1 / 1800.0 * Math.PI;
                 }
                 if (f == 1) {
                     f1 = 0;
                 }
-                ;
+
                 // f = 0;
 
                 if (tank.health <= 0 && time < 100) {
                     g.drawImage(dieImage, 0, 0, 1500, 800, null);
-                    time += deltatime / 10.0;
+                    time += deltaTime / 10.0;
                     if (Math.abs(time - 99)<2.0) {
                         tank.health = 10;
                         enemytank.health = 2;
+                        ifTankShooting =0;
                         time = 0;
                     }
                 }
-                ;
-                if (enemytank.health <= 0 && timewin < 100) {
+
+                if (enemytank.health <= 0 && timeWin < 100) {
                     g.drawImage(winImage, 0, 0, 1500, 800, null);
-                    timewin += deltatime / 10.0;
-                    if (Math.abs(timewin- 99)<2.0) {
+                    timeWin += deltaTime / 10.0;
+                    enemyTankGo.bool=0;
+                    if (Math.abs(timeWin - 99)<2.0) {
                         tank.health = 10;
                         enemytank.health = 2;
-                        timewin = 0;
-                        //nuberofthelevel=2;
-                        timelevel2 = 800;
-                        enemyboomr=0;
+                        timeWin = 0;
+
+                        timeLevel2 = 800;
+                        enemyBoomR =0;
                         try {
                             plane.bomb.initialize(120, 100, 30);
                         } catch (IOException e) {
@@ -560,151 +561,137 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                         }
                     }
                 }
-                ;                                                                                          //1 level ended
+                                                                                                          //1 level ended
             }
-            ;
 
-        } else if (numberOfTheLevel == 2) {                                                                    //level 2 started
-            if (timelevel3 >= 0) {
-                if (timelevel3>= 700  ){
+
+        }
+        else if (numberOfTheLevel == 2) {                                                                    //level 2 started
+            if (timeLevel3 >= 0) {
+                if (timeLevel3 >= 700  ){
                     g.drawImage(level3Image, 0, 0, 1500, 2121, null);}
                 else {g.drawImage(Stalingrad,755,0,563,750,null);
                 g.drawImage(MapStalingrad,150,0,600,750,null);}
-                if (timelevel3 == 0) {
+                if (timeLevel3 == 0) {
                     numberOfTheLevel = 3;
+                    enemyTankGo.bool=1;
                     tank.health = 10;
                     plane.health = 15;
-                    timewin = 0;
-                    timelevel3=-1;
+                    timeWin = 0;
+                    timeLevel3 =-1;
                 }
-                ;
-                timelevel3 -= deltatime / 10.0;} else{
+
+                timeLevel3 -= deltaTime / 10.0;} else{
             g.drawImage(level2backgroundImage, 0, 0, 1500, 800, null);
             g.setColor(Color.BLACK);
-                sound1.bool=tankgo;
+                sound1.bool= tankGo;
             g.drawImage(shootImage,50,15,110,40,null);
-            g.drawImage(showTrektoryImage,50,58,180,40,null);
+            g.drawImage(showTrajectoryImage,50,58,180,40,null);
             g.drawImage(GoTo3Level,50,140,180,40,null);
             if (goto3level==1){
                 g.drawImage(GoTo3LevelMouseMoved,50,140,180,40,null);
             }
-            if (shootbuttonmoved==1){
-                   /* Color color = new Color(0, 152, 253, 42);
-                    g.setColor(color);
-                    g.fillRect(50, 20, 100, 20);
-                    g.setColor(Color.BLACK);*/
-                g.drawImage(shootmousemovedImage,50,15,110,40,null);
+            if (shootButtonMoved ==1){
+
+                g.drawImage(shootMouseMovedImage,50,15,110,40,null);
             }
-            if (shootbuttonmoved==2){
-                    /*Color color = new Color(0, 122, 253, 232);
-                    g.setColor(color);
-                    g.fillRect(50, 20, 100, 20);
-                    g.setColor(Color.BLACK);*/
+            if (shootButtonMoved ==2){
+
                 g.drawImage(shootMouseClickedImage,50,15,110,40,null);
                 f3=1;
             }
-            //g.drawRect(50, 20, 100, 20);
-            // g.drawString("Стрелять", 55, 33);
 
-            if (showtraektorybuttonmoved==1&&f3==1){
-                    /*Color color = new Color(0, 152, 253, 42);
-                    g.setColor(color);
-                    g.fillRect(50, 50, 130, 20);
-                    g.setColor(Color.BLACK);*/
-                g.drawImage(showTraektoryMouseMovedImage,50,58,180,40,null);
+
+            if (showTrajectoryButtonMoved ==1&&f3==1){
+
+                g.drawImage(showTrajectoryMouseMovedImage,50,58,180,40,null);
             } else
             if (f3==0){
-                    /*Color color = new Color(0, 122, 253, 232);
-                    g.setColor(color);
-                    g.fillRect(50, 50, 130, 20);
-                    g.setColor(Color.BLACK);*/
-                g.drawImage(showTraektoryMouseClickedImage,50,58,180,40,null);
-            } else if (timetraektory==0){f3=0;}
-            if (timetraektory==400){f3=0;}
-            if (timetraektory==0){f3=1;}
+
+                g.drawImage(showTrajectoryMouseClickedImage,50,58,180,40,null);
+            } else if (timeTrajectory ==0){f3=0;}
+            if (timeTrajectory ==400){f3=0;}
+            if (timeTrajectory ==0){f3=1;}
 
 
-            //g.drawRect(50, 50, 130, 20);
-            //g.drawString("Показать траекторию", 55, 63);
+
             g.setFont(new Font("Impact",Font.PLAIN, 14));
             g.drawString("Скорость равна=" + (int) (ball.v), 50, 115);
             g.drawString("Угол равен=" + (int) (ball.angle * 180 / Math.PI), 50, 133);
             g.setColor(Color.GRAY);
-            //g.fillRect(0, 720, 1500, 80);
-            //g.fillRect(900,500,600,300);
+
             g.drawImage(floor,0,720,1500,80,null);
-            plane.update(deltatime / 70.0, 1);
+            plane.update(deltaTime / 70.0, 1);
 
             if (plane.xstroke > 0) {
-                planeboom = 1;
-                planeboomdirection = (int) (plane.xstroke);
+                planeBoom = 1;
+                planeBoomDirection = (int) (plane.xstroke);
                 plane.xstroke = -100000;
+                new Thread(() -> {
+                    soundBomb.playSound("h");
+                }).start();
 
             }
-            ;
-            if (planeboom == 0) {
+
+            if (planeBoom == 0) {
                 try {
-                    plane.shoot(deltatime / 150.0, g, 720);
+                    plane.shoot(deltaTime / 150.0, g, 720);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                ;
-            } else if (planeboom == 1) {
-                if (enemyboomr < 10) {
+
+            } else if (planeBoom == 1) {
+                if (enemyBoomR < 10) {
                     g.setColor(Color.RED);
-                } else if (enemyboomr < 20) {
+                } else if (enemyBoomR < 20) {
                     Color color = new Color(250, 102, 4);
                     g.setColor(color);
-                } else if (enemyboomr < 30) {
+                } else if (enemyBoomR < 30) {
                     g.setColor(Color.ORANGE);
-                } else if (enemyboomr < 40) {
+                } else if (enemyBoomR < 40) {
                     g.setColor(Color.YELLOW);
                 }
-                ;
-                //if (boomr==0&&tank.x<enemytank.x) {boomdirection=1;} else if (boomr==0&&tank.x>enemytank.x) {boomdirection=-1;};
-                if (plane.f == 1) {
-                    g.fillOval((int) (planeboomdirection - enemyboomr), (int) (tank.y + 60 - enemyboomr), 2 * (int) (enemyboomr), 2 * (int) (enemyboomr));
+
+
+                g.fillOval((int) (planeBoomDirection - enemyBoomR), (int) (tank.y + 60 - enemyBoomR), 2 * (int) (enemyBoomR), 2 * (int) (enemyBoomR));
+                if (enemyBoomR < 39) {
+                    enemyBoomR = enemyBoomR + deltaTime / 30.0;
                 } else {
-                    g.fillOval((int) (planeboomdirection - enemyboomr), (int) (tank.y + 60 - enemyboomr), 2 * (int) (enemyboomr), 2 * (int) (enemyboomr));
-                }
-                if (enemyboomr < 39) {
-                    enemyboomr = enemyboomr + deltatime / 30.0;
-                } else {
-                    enemyboomr = 0;
-                    planeboom = 0;
+                    enemyBoomR = 0;
+                    planeBoom = 0;
                     try {
                         plane.bomb.initialize((plane.x + (plane.f + 1) * 60), plane.y, 30);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    ;
+
                     plane.xstroke = -100000;
-                    ;
+
                 }
-                ;
+
             }
             plane.draw(g);
-            plane.drawhealth(g);
+            plane.drawHealth(g);
             if (plane.xstroke >= tank.x && plane.xstroke <= (tank.x + 120)) {
                 tank.health -= 1;
                 //System.out.println(tank.health);
             }
-            ;
+
             if (ball.x >= plane.x && ball.x <= (plane.x + 120) && (800 - ball.y) >= (plane.y - 48) && (800 - ball.y) <= (plane.y)) {
-                if (planestroke == 0) {
+                if (planeStroke == 0) {
                     plane.health -= 1;
-                    planestroke = 1;
+                    planeStroke = 1;
                 }
-                //System.out.println(planestroke);
+
             } else {
-                planestroke = 0; /*System.out.println(planestroke);*/
+                planeStroke = 0;
             }
-            ;
+
             if (f == 1) {
-                if (timetraektory >= 0) {
+                if (timeTrajectory >= 0) {
                     ball.drawline(0.05, ball.y, ball.x, ball.y, ball.vx, ball.vy, g, -1);
-                    //System.out.println("jjj"+timetraektory);
-                    timetraektory -= deltatime / 10.0;
+
+                    timeTrajectory -= deltaTime / 10.0;
                     try {
                         ball.initialize(ball.v, ball.angle, tank.x, (800 - tank.y));
                     } catch (IOException e) {
@@ -712,143 +699,149 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                     }
 
                 }
-                ;
-                if (timetraektory == -1) {
+
+                if (timeTrajectory == -1) {
                     f = -1;
                 }
-                ;
+
             }
-            ;
+
             if (f1 == 1) {
                 if (ball.y >= (750 - tank.y)) {
                     ball.draw(g, -1);
-                    ball.update(deltatime / 200.0, ball.y0, -1);
+                    ball.update(deltaTime / 200.0, ball.y0, -1);
                 } else {
-                    if (boomr < 10) {
+                    if (boomR < 10) {
                         g.setColor(Color.RED);
-                    } else if (boomr < 20) {
+                    } else if (boomR < 20) {
                         Color color = new Color(250, 102, 4);
                         g.setColor(color);
-                    } else if (boomr < 30) {
+                    } else if (boomR < 30) {
                         g.setColor(Color.ORANGE);
-                    } else if (boomr < 40) {
+                    } else if (boomR < 40) {
                         g.setColor(Color.YELLOW);
                     }
-                    ;
-                    g.fillOval((int) (ball.x + 30 - boomr), (int) (800 - ball.y + 10 - boomr), 2 * (int) (boomr), 2 * (int) (boomr));
-                    if (boomr < 39) {
-                        boomr = boomr + deltatime / 30.0;
+                    if (Math.abs(boomR-40)<1.0){
+                        ifTankShooting =0;
+                    }
+
+                    g.fillOval((int) (ball.x + 30 - boomR), (int) (800 - ball.y + 10 - boomR), 2 * (int) (boomR), 2 * (int) (boomR));
+                    if (boomR < 39) {
+                        boomR = boomR + deltaTime / 30.0;
                     } else {
-                        boomr = 0;
+                        boomR = 0;
                         f1 = 0;
                     }
-                    ;
+
                 }
             }
-            ;
-            if (moveright == 1 && tank.x < 1380) {
-                tank.moveright(deltatime / 10.0);
-            } else if (moveleft == 1 && tank.x > 0) {
-                tank.moveleft(deltatime / 10.0);
+
+            if (moveRight == 1 && tank.x < 1380) {
+                tank.moveRight(deltaTime / 10.0);
+            } else if (moveLeft == 1 && tank.x > 0) {
+                tank.moveLeft(deltaTime / 10.0);
             }
-            ;
+
             tank.draw(g, -1,ball.angle);
-            tank.drawhealth(g);
-            if (vplus == 1) {
+            tank.drawHealth(g);
+                if ((moveLeft ==1 || moveRight ==1)&& tankGof ==0){
+                    tankGo =1;
+                    new Thread(() -> {
+                        sound1.bool=1;
+                        sound1.playSound("h");
+                    }).start();
+                    tankGof =1;}
+                if (moveRight ==0&& moveLeft ==0){
+                    tankGo =0;
+                    tankGof =0;
+                    sound1.bool=0;
+                }
+            if (vPlus == 1) {
                 ball.v += 0.2;
-            } else if (vminus == 1) {
+            } else if (vMinus == 1) {
                 ball.v -= 0.2;
             }
-            ;
-            if (angleplus == 1&&ball.angle<=80/180.0*3.1416) {
+
+            if (anglePlus == 1&&ball.angle<=80/180.0*3.1416) {
                 ball.angle = ball.angle + 1 / 1800.0 * Math.PI;
-            } else if (angleminus == 1&&ball.angle>=0/180.0*3.1416) {
+            } else if (angleMinus == 1&&ball.angle>=0/180.0*3.1416) {
                 ball.angle = ball.angle - 1 / 1800.0 * Math.PI;
             }
             if (f == 1) {
                 f1 = 0;
             }
-            ;
+
             //f = 0;
 
             if (tank.health <= 0 && time < 100) {
                 g.drawImage(dieImage, 0, 0, 1500, 800, null);
-                time += deltatime / 10;
+                time += deltaTime / 10;
                 if (Math.abs(time- 99)<2.0) {
                     tank.health = 10;
                     plane.health = 15;
+                    ifTankShooting =0;
                     time = 0;
                 }
             }
-            ;
-            if (plane.health <= 0 && timewin < 100) {
+
+            if (plane.health <= 0 && timeWin < 100) {
                 g.drawImage(winImage, 0, 0, 1500, 800, null);
-                timewin += deltatime / 10;
-                if (Math.abs(timewin - 99)<2.0) {
+                timeWin += deltaTime / 10;
+                if (Math.abs(timeWin - 99)<2.0) {
                     tank.health = 10;
                     plane.health = 15;
-                    timewin = 0;
+                    timeWin = 0;
+                    tank.initialize(300, 660);
+                    enemyTankGo.bool=1;
                     //numberOfTheLevel = 3;
-                    timelevel3=800;
+                    timeLevel3 =800;
                 }
             }
-            ;
+
         } }                                                                                                    //level2 ended
 
 
         else if (numberOfTheLevel == 3) {                                                                           //level3 started
             g.drawImage(level3backgroundImage, 0, 0, 1500, 800, null);
             g.setColor(Color.BLACK);
-            sound1.bool=tankgo;
+            sound1.bool= tankGo;
             g.drawImage(shootImage,50,15,110,40,null);
-            g.drawImage(showTrektoryImage,50,58,180,40,null);
-            if (shootbuttonmoved==1){
-                   /* Color color = new Color(0, 152, 253, 42);
-                    g.setColor(color);
-                    g.fillRect(50, 20, 100, 20);
-                    g.setColor(Color.BLACK);*/
-                g.drawImage(shootmousemovedImage,50,15,110,40,null);
+            g.drawImage(showTrajectoryImage,50,58,180,40,null);
+            if (shootButtonMoved ==1){
+
+                g.drawImage(shootMouseMovedImage,50,15,110,40,null);
             }
-            if (shootbuttonmoved==2){
-                    /*Color color = new Color(0, 122, 253, 232);
-                    g.setColor(color);
-                    g.fillRect(50, 20, 100, 20);
-                    g.setColor(Color.BLACK);*/
+            if (shootButtonMoved ==2){
+
                 g.drawImage(shootMouseClickedImage,50,15,110,40,null);
                 f3=1;
             }
-            //g.drawRect(50, 20, 100, 20);
-            // g.drawString("Стрелять", 55, 33);
 
-            if (showtraektorybuttonmoved==1&&f3==1){
-                    /*Color color = new Color(0, 152, 253, 42);
-                    g.setColor(color);
-                    g.fillRect(50, 50, 130, 20);
-                    g.setColor(Color.BLACK);*/
-                g.drawImage(showTraektoryMouseMovedImage,50,58,180,40,null);
+
+            if (showTrajectoryButtonMoved ==1&&f3==1){
+
+                g.drawImage(showTrajectoryMouseMovedImage,50,58,180,40,null);
             } else
             if (f3==0){
-                    /*Color color = new Color(0, 122, 253, 232);
-                    g.setColor(color);
-                    g.fillRect(50, 50, 130, 20);
-                    g.setColor(Color.BLACK);*/
-                g.drawImage(showTraektoryMouseClickedImage,50,58,180,40,null);
-            } else if (timetraektory==0){f3=0;}
-            if (timetraektory==400){f3=0;}
-            if (timetraektory==0){f3=1;}
+
+                g.drawImage(showTrajectoryMouseClickedImage,50,58,180,40,null);
+            } else if (timeTrajectory ==0){f3=0;}
+            if (timeTrajectory ==400){f3=0;}
+            if (timeTrajectory ==0){f3=1;}
 
 
-            //g.drawRect(50, 50, 130, 20);
-            //g.drawString("Показать траекторию", 55, 63);
+
             g.setFont(new Font("Impact",Font.PLAIN, 14));
             g.drawString("Скорость равна=" + (int) (ball.v), 50, 115);
             g.drawString("Угол равен=" + (int) (ball.angle * 180 / Math.PI), 50, 133);
             g.setColor(Color.GRAY);
             g.drawImage(floor,0, 720, 1500, 80,null);
             g.drawImage(floor1,800, 600, 700, 200,null);
-            if (threebegin < 2) {
+            if (threeBegin < 2) {
+                tank.initialize(300, 660);
                 enemytank.initialize(1000, 260);
                 plane.initialize(100, 100, 0);
+                enemyTankGo.bool=1;
                 try {
                     plane.bomb.initialize(100, 100, 30);
                 } catch (IOException e) {
@@ -858,13 +851,13 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                 plane.xstroke = -10000;
                 enemytank.enemyball.y = 0;
             }
-            ;
-            threebegin += 1;
+
+            threeBegin += 1;
             if (f == 1) {
-                if (timetraektory >= 0) {
+                if (timeTrajectory >= 0) {
                     ball.drawline(0.05, (ball.y + 100), ball.x, ball.y, ball.vx, ball.vy, g, -1);
-                    //System.out.println("jjj"+timetraektory);
-                    timetraektory -= deltatime / 10.0;
+
+                    timeTrajectory -= deltaTime / 10.0;
                     try {
                         ball.initialize(ball.v, ball.angle, tank.x, (800 - tank.y));
                     } catch (IOException e) {
@@ -872,48 +865,63 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                     }
 
                 }
-                ;
-                if (timetraektory == -1) {
+
+                if (timeTrajectory == -1) {
                     f = -1;
                 }
-                ;
+
             }
-            ;
+
             if (f1 == 1) {
-                if (ball.y >= (750 - tank.y + 120) || ball.vy > 0 || ball.x < 800 && ball.y >= (750 - tank.y)) {
+                if ((ball.y >= (750 - tank.y + 120) || ball.vy > 0 || ball.x < 800 && ball.y >= (750 - tank.y))&&(ball.x<770||ball.y>200)) {
                     ball.draw(g, -1);
-                    ball.update(deltatime / 200.0, (750 - tank.y + 120), -1);
+                    ball.update(deltaTime / 200.0, (750 - tank.y + 120), -1);
                 } else {
-                    if (boomr < 10) {
+                    if (boomR < 10) {
                         g.setColor(Color.RED);
-                    } else if (boomr < 20) {
+                    } else if (boomR < 20) {
                         Color color = new Color(250, 102, 4);
                         g.setColor(color);
-                    } else if (boomr < 30) {
+                    } else if (boomR < 30) {
                         g.setColor(Color.ORANGE);
-                    } else if (boomr < 40) {
+                    } else if (boomR < 40) {
                         g.setColor(Color.YELLOW);
                     }
-                    ;
-                    g.fillOval((int) (ball.x + 30 - boomr), (int) (800 - ball.y + 10 - boomr), 2 * (int) (boomr), 2 * (int) (boomr));
-                    if (boomr < 39) {
-                        boomr = boomr + deltatime / 30.0;
+                    if (Math.abs(boomR-40)<2.5){
+                        ifTankShooting =0;
+                    }
+
+                    g.fillOval((int) (ball.x + 30 - boomR), (int) (800 - ball.y + 10 - boomR), 2 * (int) (boomR), 2 * (int) (boomR));
+                    if (boomR < 39) {
+                        boomR = boomR + deltaTime / 30.0;
                     } else {
-                        boomr = 0;
+                        boomR = 0;
                         f1 = 0;
                     }
-                    ;
+
                 }
             }
-            ;
-            if (moveright == 1 && tank.x < 680) {
-                tank.moveright(deltatime / 10.0);
-            } else if (moveleft == 1 && tank.x > 0) {
-                tank.moveleft(deltatime / 10.0);
+
+            if (moveRight == 1 && tank.x < 680) {
+                tank.moveRight(deltaTime / 10.0);
+            } else if (moveLeft == 1 && tank.x > 0) {
+                tank.moveLeft(deltaTime / 10.0);
             }
-            ;
+
             tank.draw(g, -1,ball.angle);
-            tank.drawhealth(g);
+            tank.drawHealth(g);
+            if ((moveLeft ==1 || moveRight ==1)&& tankGof ==0){
+                tankGo =1;
+                new Thread(() -> {
+                    sound1.bool=1;
+                    sound1.playSound("h");
+                }).start();
+                tankGof =1;}
+            if (moveRight ==0&& moveLeft ==0){
+                tankGo =0;
+                tankGof =0;
+                sound1.bool=0;
+            }
             if (enemytank.health > 0) {
                 enemytank.draw(g, 1);
                 enemytank.drawhealth(g);
@@ -921,318 +929,380 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                     enemytank.health -= 1;
                     //System.out.println(tank.health);
                 }
-                ;
+
                 if (Math.abs(enemytank.enemyball.y - enemytank.enemyball.y0) < 2.5 && enemytank.enemyball.y != enemytank.enemyball.y0) {
                     if (tank.x < enemytank.x) {
-                        enemyballdirection = -1;
+                        enemyBallDirection = -1;
                     } else {
-                        enemyballdirection = 1;
+                        enemyBallDirection = 1;
                     }
-                    ;
+
                 }
-                ;
+
                 if (enemytank.enemyball.xstroke > 0) {
-                    enemyboom = 1;
+                    EnemyBoom = 1;
                     enemytank.enemyball.xstroke = -10000;
-                    enemyboomdirection = enemyballdirection;
+                    enemyBoomDirection = enemyBallDirection;
                 }
-                ;
-                if (enemyboom == 1) {
-                    if (enemyboomr < 10) {
+
+                if (EnemyBoom == 1) {
+                    if (enemyBoomR < 10) {
                         g.setColor(Color.RED);
-                    } else if (enemyboomr < 20) {
+                    } else if (enemyBoomR < 20) {
                         Color color = new Color(250, 102, 4);
                         g.setColor(color);
-                    } else if (enemyboomr < 30) {
+                    } else if (enemyBoomR < 30) {
                         g.setColor(Color.ORANGE);
-                    } else if (enemyboomr < 40) {
+                    } else if (enemyBoomR < 40) {
                         g.setColor(Color.YELLOW);
                     }
-                    ;
-                    //if (boomr==0&&tank.x<enemytank.x) {boomdirection=1;} else if (boomr==0&&tank.x>enemytank.x) {boomdirection=-1;};
-                    if (enemyboomdirection == -1) {
-                        g.fillOval((int) (enemytank.enemyball.x + 30 - enemyboomr), (int) (800 - enemytank.enemyball.y + 10 - enemyboomr), 2 * (int) (enemyboomr), 2 * (int) (enemyboomr));
+
+
+                    g.fillOval((int) (enemytank.enemyball.x + 30 - enemyBoomR), (int) (800 - enemytank.enemyball.y + 10 - enemyBoomR), 2 * (int) (enemyBoomR), 2 * (int) (enemyBoomR));
+                    if (enemyBoomR < 39) {
+                        enemyBoomR = enemyBoomR + deltaTime / 30.0;
                     } else {
-                        g.fillOval((int) (enemytank.enemyball.x + 30 - enemyboomr), (int) (800 - enemytank.enemyball.y + 10 - enemyboomr), 2 * (int) (enemyboomr), 2 * (int) (enemyboomr));
+                        enemyBoomR = 0;
+                        EnemyBoom = 0;
                     }
-                    if (enemyboomr < 39) {
-                        enemyboomr = enemyboomr + deltatime / 30.0;
-                    } else {
-                        enemyboomr = 0;
-                        enemyboom = 0;
-                    }
-                    ;
+
                 }
-                ;
+
                 try {
-                    if (enemyboom == 0) {
-                        enemytank.shoot(deltatime / 200.0, tank.x, 800 - tank.y - 60, g, enemyballdirection);
+                    if (EnemyBoom == 0) {
+                        enemytank.shoot(deltaTime / 200.0, tank.x, 800 - tank.y - 60, g, enemyBallDirection);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                ;
+
                 if (enemytank.enemyball.xstroke >= tank.x && enemytank.enemyball.xstroke <= (tank.x + 120)) {
                     tank.health -= 1;
                     //System.out.println(tank.health);
                 }
-                ;
 
-                enemytank.move(deltatime / 20.0, 800, -1);
-            }
 
-            if (vplus == 1) {
+                enemytank.move(deltaTime / 20.0, 800, -1);
+            } else{
+                enemyTankGo.bool=0;}
+
+            if (vPlus == 1) {
                 ball.v += 0.2;
-            } else if (vminus == 1) {
+            } else if (vMinus == 1) {
                 ball.v -= 0.2;
             }
-            ;
-            if (angleplus == 1&&ball.angle<=80/180.0*3.1416) {
+
+            if (anglePlus == 1&&ball.angle<=80/180.0*3.1416) {
                 ball.angle = ball.angle + 1 / 1800.0 * Math.PI;
-            } else if (angleminus == 1&&ball.angle>=0/180.0*3.1416) {
+            } else if (angleMinus == 1&&ball.angle>=0/180.0*3.1416) {
                 ball.angle = ball.angle - 1 / 1800.0 * Math.PI;
             }
             if (f == 1) {
                 f1 = 0;
             }
-            ;
+
             if (plane.health > 0) {
                 plane.draw(g);
                 if (plane.bomb.x < 800) {
-                    /*plane.shoot(deltatime/200.0,g,720)*/
+
                     if (plane.xstroke > 0) {
-                        planeboom = 1;
-                        planeboomdirection = (int) (plane.xstroke);
+                        planeBoom = 1;
+                        planeBoomDirection = (int) (plane.xstroke);
                         plane.xstroke = -100000;
 
+
                     }
-                    ;
-                    if (planeboom == 0) {
+
+                    if (planeBoom == 0) {
                         try {
-                            plane.shoot(deltatime / 150.0, g, 720);
+                            plane.shoot(deltaTime / 150.0, g, 720);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        ;
-                    } else if (planeboom == 1) {
-                        if (enemyboomr3 < 10) {
+
+                    } else if (planeBoom == 1) {
+                        if (enemyBoomR3==0){
+                            new Thread(() -> {
+                                soundBomb.playSound("h");
+                            }).start();
+                        }
+                        if (enemyBoomR3 < 10) {
                             g.setColor(Color.RED);
-                        } else if (enemyboomr3 < 20) {
+                        } else if (enemyBoomR3 < 20) {
                             Color color = new Color(250, 102, 4);
                             g.setColor(color);
-                        } else if (enemyboomr3 < 30) {
+                        } else if (enemyBoomR3 < 30) {
                             g.setColor(Color.ORANGE);
-                        } else if (enemyboomr3 < 40) {
+                        } else if (enemyBoomR3 < 40) {
                             g.setColor(Color.YELLOW);
                         }
-                        ;
-                        //if (boomr==0&&tank.x<enemytank.x) {boomdirection=1;} else if (boomr==0&&tank.x>enemytank.x) {boomdirection=-1;};
-                        if (plane.f == 1) {
-                            g.fillOval((int) (planeboomdirection - enemyboomr3), (int) (720 - enemyboomr3), 2 * (int) (enemyboomr3), 2 * (int) (enemyboomr3));
+
+
+                        g.fillOval((int) (planeBoomDirection - enemyBoomR3), (int) (720 - enemyBoomR3), 2 * (int) (enemyBoomR3), 2 * (int) (enemyBoomR3));
+                        if (enemyBoomR3 < 39) {
+                            enemyBoomR3 = (enemyBoomR3 + deltaTime / 30.0);
                         } else {
-                            g.fillOval((int) (planeboomdirection - enemyboomr3), (int) (720 - enemyboomr3), 2 * (int) (enemyboomr3), 2 * (int) (enemyboomr3));
-                        }
-                        if (enemyboomr3 < 39) {
-                            enemyboomr3 = (enemyboomr3 + deltatime / 30.0);
-                        } else {
-                            enemyboomr3 = 0;
-                            planeboom = 0;
+                            enemyBoomR3 = 0;
+                            planeBoom = 0;
                             try {
                                 plane.bomb.initialize((plane.x + (plane.f + 1) * 60), plane.y, 30);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                            ;
+
                             plane.xstroke = -100000;
-                            ;
+
                         }
-                        ;
+
                     }
-                    ;
-                } else {//plane.shoot(deltatime/200.0,g,600)
+
+                } else {
                     if (plane.xstroke > 0) {
-                        planeboom = 1;
-                        planeboomdirection = (int) (plane.xstroke);
+                        planeBoom = 1;
+                        planeBoomDirection = (int) (plane.xstroke);
                         plane.xstroke = -100000;
 
                     }
-                    ;
-                    if (planeboom == 0) {
+
+                    if (planeBoom == 0) {
                         try {
-                            plane.shoot(deltatime / 150.0, g, 600);
+                            plane.shoot(deltaTime / 150.0, g, 600);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        ;
-                    } else if (planeboom == 1) {
-                        if (enemyboomr3 < 10) {
+
+                    } else if (planeBoom == 1) {
+                        if (enemyBoomR3==0){
+                            new Thread(() -> {
+                                soundBomb.playSound("h");
+                            }).start();
+                        }
+                        if (enemyBoomR3 < 10) {
                             g.setColor(Color.RED);
-                        } else if (enemyboomr3 < 20) {
+                        } else if (enemyBoomR3 < 20) {
                             Color color = new Color(250, 102, 4);
                             g.setColor(color);
-                        } else if (enemyboomr3 < 30) {
+                        } else if (enemyBoomR3 < 30) {
                             g.setColor(Color.ORANGE);
-                        } else if (enemyboomr3 < 40) {
+                        } else if (enemyBoomR3 < 40) {
                             g.setColor(Color.YELLOW);
                         }
-                        ;
-                        //if (boomr==0&&tank.x<enemytank.x) {boomdirection=1;} else if (boomr==0&&tank.x>enemytank.x) {boomdirection=-1;};
-                        if (plane.f == 1) {
-                            g.fillOval((int) (planeboomdirection - enemyboomr3), (int) (600 - enemyboomr3), 2 * (int) (enemyboomr3), 2 * (int) (enemyboomr3));
+
+
+                        g.fillOval((int) (planeBoomDirection - enemyBoomR3), (int) (600 - enemyBoomR3), 2 * (int) (enemyBoomR3), 2 * (int) (enemyBoomR3));
+                        if (enemyBoomR3 < 39) {
+                            enemyBoomR3 = (enemyBoomR3 + deltaTime / 30.0);
                         } else {
-                            g.fillOval((int) (planeboomdirection - enemyboomr3), (int) (600 - enemyboomr3), 2 * (int) (enemyboomr3), 2 * (int) (enemyboomr3));
-                        }
-                        if (enemyboomr3 < 39) {
-                            enemyboomr3 = (enemyboomr3 + deltatime / 30.0);
-                        } else {
-                            enemyboomr3 = 0;
-                            planeboom = 0;
+                            enemyBoomR3 = 0;
+                            planeBoom = 0;
                             try {
                                 plane.bomb.initialize((plane.x + (plane.f + 1) * 60), plane.y, 30);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                            ;
+
                             plane.xstroke = -100000;
-                            ;
+
                         }
-                        ;
+
                     }
-                    ;
+
                 }
-                plane.drawhealth(g);
-                plane.update(deltatime / 70.0, 1);
+                plane.drawHealth(g);
+                plane.update(deltaTime / 70.0, 1);
             }
             if (plane.xstroke >= tank.x && plane.xstroke <= (tank.x + 120)) {
                 tank.health -= 1;
                 //System.out.println(tank.health);
             }
-            ;
+
             if (ball.x >= plane.x && ball.x <= (plane.x + 120) && (800 - ball.y) >= (plane.y - 48) && (800 - ball.y) <= (plane.y)) {
-                if (planestroke == 0) {
+                if (planeStroke == 0) {
                     plane.health -= 3;
-                    planestroke = 1;
+                    planeStroke = 1;
                 }
-                //System.out.println(planestroke);
+
             } else {
-                planestroke = 0; /*System.out.println(planestroke);*/
+                planeStroke = 0;
             }
-            ;
+
 
             if (tank.health <= 0 && time < 100) {
                 g.drawImage(dieImage, 0, 0, 1500, 800, null);
-                time += deltatime / 10;
+                time += deltaTime / 10;
                 if (time == 99) {
                     tank.health = 10;
                     plane.health = 15;
                     time = 0;
                 }
             }
-            ;
-            if (plane.health <= 0 && enemytank.health <= 0 && timewin < 100) {
+
+            if (plane.health <= 0 && enemytank.health <= 0 && timeWin < 100) {
                 g.drawImage(winImage, 0, 0, 1500, 800, null);
-                timewin += deltatime / 10;
-                if (Math.abs(timewin-100) <= 2) {
+                timeWin += deltaTime / 10;
+                if (Math.abs(timeWin -100) <= 2) {
                     tank.health = 10;
                     enemytank.health = 2;
                     plane.health = 15;
-                    timewin = 0;
-                    numberOfTheLevel = 3;
+                    timeWin = 0;
+                    numberOfTheLevel = 4;
+                    enemyTankGo.bool=0;
+                    howManyTimesIWon+=1;
                 }
             }
-            ;
+
             if (tank.health <= 0 && time < 100) {
                 g.drawImage(dieImage, 0, 0, 1500, 800, null);
-                time += deltatime / 10;
+                time += deltaTime / 10;
                 if (time == 99) {
                     tank.health = 10;
                     plane.health = 15;
+                    ifTankShooting =0;
                     enemytank.health = 2;
                     time = 0;
+                    enemyTankGo.bool=1;
                 }
             }
-            ;
 
 
+
+        }
+        else if (numberOfTheLevel==4){
+            if (timeLevel4==-1){                      // delete then
+                deltaTime=10;
+            }
+            if (timeLevel4<300) {
+                timeLevel4 = timeLevel4+deltaTime/10.0;
+               // System.out.println(timeLevel4);
+                g.drawImage(FinalImage,0,0,1500,800,null);
+            } else {
+                g.setFont(new Font("Impact",Font.PLAIN, 80));
+                g.drawString("Вы выиграли войну !!!",350,100);
+                g.setFont(new Font("Impact",Font.PLAIN, 50));
+                g.drawString("Начать заново ?",500,200);
+                if (yesMouseMoved==0) {
+                    g.drawImage(Yesimage, 450, 250, 175, 100, null);
+                } else {g.drawImage(YesMouseMovedImage, 450, 250, 175, 100, null);}
+                if (noMouseMoved==0){
+                g.drawImage(NoImage,700,250,177,100,null);}
+                else {g.drawImage(NoMouseMovedImage,700,250,177,100,null);}
+                g.setFont(new Font("Impact",Font.PLAIN, 30));
+                g.drawString("Количество побед = " + howManyTimesIWon,500,450);
+
+
+            }
         }
 
 
     }
 
-    ;
+
 
     @Override
     public void mouseClicked(MouseEvent e) {
         if (((e.getX() >= 50) && (e.getX() <= 160)) && ((e.getY() >= 15) && (e.getY() <= 55))) {
             if (tank.x < enemytank.x) {
-                balldirection = -1;
+                ballDirection = -1;
             } else {
-                balldirection = 1;
+                ballDirection = 1;
             }
-            ;
-            f1 = 1;
-            f = -1;
-            shootbuttonmoved=2;
-            boomr = 0;
-            new Thread(() -> {
-                new TankFires().playSound("bip.wav");
-            }).start();
-            try {
-                ball.initialize(ball.v, ball.angle, tank.x, (800 - tank.y));
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
+
+
+            shootButtonMoved =2;
+
+            if (ifTankShooting ==0) {
+                new Thread(() -> new TankFires().playSound("bip.wav")).start();
+                ifTankShooting =1;
+                f1 = 1;
+                f = -1;
+                boomR = 0;
+                try {
+                    ball.initialize(ball.v, ball.angle, tank.x, (800 - tank.y));
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
             }
-            ;
+
 
         }
-        ;
+
         if (numberOfTheLevel == 0) {
             if (((e.getX() >= 50) && (e.getX() <= 237)) && ((e.getY() >= 150) && (e.getY() <= 190))) {
                 numberOfTheLevel = 1;
-                //timelevel1 = 120;                                                      //на реальном запуске время увеличить до 200!!!!!!
-                timelevel1=200;                                                                                                       //increase to 800!!!!
+                                                                                                        //на реальном запуске время увеличить до 200!!!!!!
+                timeLevel1 =200;                                                                                                       //increase to 800!!!!
             }
         }
-        ;
+
         if (numberOfTheLevel == -1) {
             if (((e.getX() >= 50) && (e.getX() <= 322)) && ((e.getY() >= 500) && (e.getY() <= 560))) {
                 numberOfTheLevel = 0;
-                timestudy = 120;                 //на реальном запуске время увеличить до 200!!!!!!
+                timeStudy = 120;                 //на реальном запуске время увеличить до 200!!!!!!
             }
-            ;
+
 
         }
-        if (numberOfTheLevel == 1&&timelevel1<0) {
+        if (numberOfTheLevel == 1&& timeLevel1 <0) {
             if ((e.getX() >= 50) && (e.getX() <= 228) && (e.getY() >= 140) && (e.getY() <= 180)) {
-                timelevel2 = 800;
+                timeLevel2 = 800;
+                enemyTankGo.bool=0;
             }
-            ;
+
         }
-        ;
+
         if (numberOfTheLevel==2){
             if ((e.getX() >= 50) && (e.getX() <= 230) && (e.getY() >= 140) && (e.getY() <= 180)) {
                 //plane.health=-1;
-                timelevel3=800;
+                tank.initialize(300, 660);
+                enemytank.initialize(1000, 260);
+                plane.initialize(100, 100, 0);
+                try {
+                    plane.bomb.initialize(100, 100, 30);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                enemytank.enemyball.vy = -1;
+                plane.xstroke = -10000;
+                enemytank.enemyball.y = 0;
+                timeLevel3 =800;
+            }
+        }
+        if (numberOfTheLevel==4){
+            if (((e.getX() >= 450) && (e.getX() <= 625)) && ((e.getY() >= 250) && (e.getY() <= 350))){
+                timeLevel2=-1;
+                timeLevel3=-1;
+                timeLevel4=-1;
+                time=0;
+                timeWin=0;
+                timeStudy=-1;
+                enemytank.initialize(800, 140);
+                numberOfTheLevel=1;
+                timeLevel1 =200;
+                enemyTankGo.bool=1;
+            }
+            if (((e.getX() >= 700) && (e.getX() <= 877)) && ((e.getY() >= 250) && (e.getY() <= 350))){
+                frameClose =false;
             }
         }
         if (((e.getX() >= 50) && (e.getX() <= 230)) && ((e.getY() >= 58) && (e.getY() <= 98))) {
-            if (tank.x < enemytank.x) {
-                balldirection = -1;
-            } else {
-                balldirection = 1;
-            }
-            ;
-            try {
-                ball.initialize(ball.v, ball.angle, tank.x, (800 - tank.y));
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-            ;
-            timetraektory = 400;
-            f = 1;
+            if (ifTankShooting ==0) {
+                if (tank.x < enemytank.x) {
+                    ballDirection = -1;
+                } else {
+                    ballDirection = 1;
+                }
 
+                try {
+                    ball.initialize(ball.v, ball.angle, tank.x, (800 - tank.y));
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+
+                timeTrajectory = 400;
+                f = 1;
+            }
         }
-        ;
+
 
 
     }
@@ -1259,38 +1329,30 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
 
     @Override
     public void mouseDragged(MouseEvent e) {
-       /* if (((e.getX()>=50)&&(e.getX()<=180))&&((e.getY()>=50)&&(e.getY()<=70))) {
-            if (tank.x<enemytank.x){
-                balldirection=-1;
-            } else{balldirection=1;};
-            try {
-                ball.initialize(ball.v, ball.angle, tank.x, (800-tank.y));
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            };
-            timetraektory=100;
 
-            f = 1;
-        };*/
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
         if (((e.getX() >= 50) && (e.getX() <= 160)) && ((e.getY() >= 15) && (e.getY() <= 55))) {
-            shootbuttonmoved=1;
-        } else {shootbuttonmoved=0;}
+            shootButtonMoved =1;
+        } else {
+            shootButtonMoved =0;}
         if (((e.getX() >= 50) && (e.getX() <= 230)) && ((e.getY() >= 58) && (e.getY() <= 98))) {
-            showtraektorybuttonmoved=1;
-        } else {showtraektorybuttonmoved=0;}
+            showTrajectoryButtonMoved =1;
+        } else {
+            showTrajectoryButtonMoved =0;}
         if (numberOfTheLevel ==-1){
             if (((e.getX() >= 50) && (e.getX() <= 322)) && ((e.getY() >= 500) && (e.getY() <= 560))) {
-                studyf=1;
-            } else {studyf=0;}
+                studyF =1;
+            } else {
+                studyF =0;}
         }
         if (numberOfTheLevel==0){
             if (((e.getX() >= 50) && (e.getX() <= 237)) && ((e.getY() >= 150) && (e.getY() <= 190))){
-                finishstudyf=1;
-            } else {finishstudyf=0;}
+                finishStudyF =1;
+            } else {
+                finishStudyF =0;}
         }
         if (numberOfTheLevel==1){
             if (((e.getX() >= 50) && (e.getX() <= 228)) && ((e.getY() >= 140) && (e.getY() <= 180))){
@@ -1302,6 +1364,14 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                 goto3level=1;
             } else {goto3level=0;}
         }
+        if (numberOfTheLevel==4){
+            if (((e.getX() >= 450) && (e.getX() <= 625)) && ((e.getY() >= 250) && (e.getY() <= 350))){
+                yesMouseMoved=1;
+            } else {yesMouseMoved=0;}
+            if (((e.getX() >= 700) && (e.getX() <= 877)) && ((e.getY() >= 250) && (e.getY() <= 350))){
+                noMouseMoved=1;
+            } else {noMouseMoved=0;}
+        }
 
     }
 
@@ -1310,54 +1380,40 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
         public boolean dispatchKeyEvent(KeyEvent e) {
             if (e.getID() == KeyEvent.KEY_PRESSED) {
                 if (e.getKeyCode() == KeyEvent.VK_D) {
-                    moveright = 1;
-                    tankgo=1;
-                    if (tankgof==0){
-                    new Thread(() -> {
-                        sound1.playSound("src/neiz_esten-z_uk-tanka.wav");
-                    }).start();}
-                    tankgof=1;
+                    moveRight = 1;
+
                 } else if (e.getKeyCode() == KeyEvent.VK_A) {
-                    moveleft = 1;
-                    tankgo=1;
-                    if (tankgof==0){
-                        new Thread(() -> {
-                            sound1.playSound("src/neiz_esten-z_uk-tanka.wav");
-                        }).start();}
-                    tankgof=1;
+                    moveLeft = 1;
+
                 } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    vplus = 1;
+                    vPlus = 1;
                 } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    vminus = 1;
+                    vMinus = 1;
                 } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    angleplus = 1;
+                    anglePlus = 1;
                 } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    angleminus = 1;
+                    angleMinus = 1;
                 }
-                ;
+
             }
-            ;
+
             if (e.getID() == KeyEvent.KEY_RELEASED) {
                 if (e.getKeyCode() == KeyEvent.VK_D) {
-                    moveright = 0;
-                    tankgo=0;
-                    tankgof=0;
+                    moveRight = 0;
                 } else if (e.getKeyCode() == KeyEvent.VK_A) {
-                    moveleft = 0;
-                    tankgo=0;
-                    tankgof=0;
+                    moveLeft = 0;
                 } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    vplus = 0;
+                    vPlus = 0;
                 } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    vminus = 0;
+                    vMinus = 0;
                 } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    angleplus = 0;
+                    anglePlus = 0;
                 } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    angleminus = 0;
+                    angleMinus = 0;
                 }
-                ;
+
             }
-            ;
+
 
 
             return false;

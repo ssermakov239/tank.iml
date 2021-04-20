@@ -12,19 +12,18 @@ public class Ball {
     public double vx=150;  //можно увеличивать массу, уменьшать скорости , увеличивать dt , тогда
     public double vy=200;  // полёт будет более плавным, траектория будет приближаться  параболе - теперь уже не надо
     public double x=100;
-    public double x0;
+    private double x0;
     public  double y0;
     public double xstroke=-1;
-    public int f=0;
+    private int f=0;
     public double y=100;
-    public double dt = 0.02;
-    public double G =10;
-    public double dvx;
-    public double dvy;
-    public double const1 = 0.00013; //плотность
-    public double m = 0.9;
-    public double k =0.04;  // k0 k=0.01
-    BufferedImage bulletimage;
+    private double dt = 0.02;
+    private double G =10;
+    private double dvx;
+    private double dvy;
+    private double m = 0.9;
+    private double k =0.04;  // k0 k=0.01
+    BufferedImage bulletImage;
 
     public Ball(){ };
     public void initialize(double a, double b,double c, double d) throws IOException {
@@ -36,7 +35,7 @@ public class Ball {
         y=d;
         vx=v*Math.cos(angle);
         vy=v*Math.sin(angle);
-        this.bulletimage= ImageIO.read(new File("src/bullets_png35596 (1).png"));
+        this.bulletImage = ImageIO.read(new File("src/bullets_png35596 (1).png"));
     };
     public void update (double a,double ymin,int direction){
         for (int i=0;i<3;i++) {
@@ -79,8 +78,8 @@ public class Ball {
     };
     public void draw(Graphics  g,int direction){
         g.setColor(Color.RED);
-        double locationX = bulletimage.getWidth() / 2;
-        double locationY = bulletimage.getHeight() / 2;
+        double locationX = bulletImage.getWidth() / 2;
+        double locationY = bulletImage.getHeight() / 2;
         double angleInRadians=0;
         if (direction==-1){
          angleInRadians=Math.atan(-vy/vx);}
@@ -89,7 +88,7 @@ public class Ball {
         };
         AffineTransform tx = AffineTransform.getRotateInstance(angleInRadians, locationX, locationY);
         AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-        g.drawImage(op.filter(bulletimage, null), (int)(x-(direction+1)*50), (int)(800-y),50,37, null);
+        g.drawImage(op.filter(bulletImage, null), (int)(x-(direction+1)*50), (int)(800-y),50,37, null);
         //g.fillOval((int)(x),(int)(800-y),20,20);
     };
     public void drawline (double a,double ymin,double b,double c,double d,double e, Graphics g,int direction){
@@ -99,7 +98,7 @@ public class Ball {
         double vy1=e;
         double dvx1;
         double dvy1;
-        dt=0.08;
+        dt=0.04;
         g.setColor(Color.BLUE);
         int n=0;
         while (vy1>=0||y1>=ymin) {
@@ -115,7 +114,7 @@ public class Ball {
             else {x1 = x1 - (vx1 * dt);};
             y1 = y1 + (vy1 * dt);
             g.setColor(Color.BLUE);
-            if (n%30==0) {
+            if (n%60==0) {
             g.fillOval((int)(x1-(direction+1)*50),(int)(800-y1),5,5);}
             n+=1;
         };

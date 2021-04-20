@@ -36,17 +36,17 @@ public class Tank {
             g.drawImage(op.filter(gun, null), (int)(x+25+(74-28*(1-Math.cos(3.1416-angleInRadians)))), (int)(y-20-20*Math.sin(3.1416-angleInRadians)-10*Math.sin(3.1416-angleInRadians)*Math.sin(3.1416-angleInRadians)),-80,80, null);
         }
     };
-    public void drawhealth (Graphics g ){
+    public void drawHealth(Graphics g ){
         g.setColor(Color.GRAY);
         g.fillRect((int)(x-30),(int)(y-50),180,20);
         g.setColor(Color.GREEN);
         g.fillRect((int)(x-25),(int)(y-45),(170/10*health),10);
     };
-    public void moveright( double dt){
+    public void moveRight(double dt){
         double v =2.8;
         x+=v*dt;
     };
-    public void moveleft(double dt){
+    public void moveLeft(double dt){
         double v=2.8;
         x-=v*dt;
     };
