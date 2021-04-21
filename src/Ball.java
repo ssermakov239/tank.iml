@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class Ball {
@@ -15,7 +14,7 @@ public class Ball {
     private double x0;
     public  double y0;
     public double xstroke=-1;
-    private int f=0;
+    private int ifXstroke =0;
     public double y=100;
     private double dt = 0.02;
     private double G =10;
@@ -35,13 +34,11 @@ public class Ball {
         y=d;
         vx=v*Math.cos(angle);
         vy=v*Math.sin(angle);
-        this.bulletImage = ImageIO.read(new File("src/bullets_png35596 (1).png"));
+        this.bulletImage = ImageIO.read(Ball.class.getResourceAsStream("bullets_PNG35596.png"));
     };
     public void update (double a,double ymin,int direction){
         for (int i=0;i<3;i++) {
             dt = a;
-        /*dvx=-1*dt/m*k*Math.exp(-1*const1*y)*Math.sqrt(vx*vx+vy*vy)*vx;
-        dvy=-1*dt/m*(m*G+k*Math.exp(-1*const1*y)*Math.sqrt(vx*vx+vy*vy)*vy);*/
             if (y<860){
             dvx = -1 * dt / (m * 5.0) * k * Math.pow((1 - 3.65 * Math.pow(10, -3.5) * y), 2.5) * Math.sqrt(vx * vx + vy * vy) * vx;
             dvy = -1 * dt / (m * 5.0) * (m * G + k * Math.pow((1 - 3.65 * Math.pow(10, -3.5) * y), 2.5) * Math.sqrt(vx * vx + vy * vy) * vy);}
@@ -52,16 +49,15 @@ public class Ball {
             x = x - direction * (vx * dt);
             y = y + (vy * dt);
         }
-            //System.out.println(y+" "+y0);
-            if (vy < 0 && Math.abs(y - ymin) < 2.5 && x != x0 && f == 0) {
+
+            if (vy < 0 && Math.abs(y - ymin) < 2.5 && x != x0 && ifXstroke == 0) {
                 xstroke = x;
-                f = 1;
-                //System.out.println("kkk");
+                ifXstroke = 1;
 
             } else {
                 xstroke = -1;
                 if (Math.abs(y - ymin) > 2.5) {
-                    f = 0;
+                    ifXstroke = 0;
                 }
             }
             ;
@@ -89,41 +85,32 @@ public class Ball {
         AffineTransform tx = AffineTransform.getRotateInstance(angleInRadians, locationX, locationY);
         AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
         g.drawImage(op.filter(bulletImage, null), (int)(x-(direction+1)*50), (int)(800-y),50,37, null);
-        //g.fillOval((int)(x),(int)(800-y),20,20);
+
     };
-    public void drawline (double a,double ymin,double b,double c,double d,double e, Graphics g,int direction){
-         double x1=b;
-        double y1=c;
-        double vx1=d;
-        double vy1=e;
-        double dvx1;
-        double dvy1;
+
+    public void drawline (double ymin,double xTrajectory,double yTrajectory,double vxTrajectory,double vyTrajectory, Graphics g,int direction){
+        double dvxTrajectory;
+        double dvyTrajectory;
         dt=0.04;
         g.setColor(Color.BLUE);
         int n=0;
-        while (vy1>=0||y1>=ymin) {
-            if (y1<860){
-            dvx1=-1*dt/(m*5.0)*k*Math.pow((1-3.65*Math.pow(10,-3.5)*y1),2.5)*Math.sqrt(vx1*vx1+vy1*vy1)*vx1;
-            dvy1=-1*dt/(m*5.0)*(m*G+k*Math.pow((1-3.65*Math.pow(10,-3.5)*y1),2.5)*Math.sqrt(vx1*vx1+vy1*vy1)*vy1);}
-            else {dvx1=0;
-            dvy1=-G*dt/5.0;}
-            vx1 = vx1 + dvx1;
-            vy1 = vy1 + dvy1;
+        while (vyTrajectory>=0||yTrajectory>=ymin) {
+            if (yTrajectory<860){
+            dvxTrajectory=-1*dt/(m*5.0)*k*Math.pow((1-3.65*Math.pow(10,-3.5)*yTrajectory),2.5)*Math.sqrt(vxTrajectory*vxTrajectory+vyTrajectory*vyTrajectory)*vxTrajectory;
+            dvyTrajectory=-1*dt/(m*5.0)*(m*G+k*Math.pow((1-3.65*Math.pow(10,-3.5)*yTrajectory),2.5)*Math.sqrt(vxTrajectory*vxTrajectory+vyTrajectory*vyTrajectory)*vyTrajectory);}
+            else {dvxTrajectory=0;
+            dvyTrajectory=-G*dt/5.0;}
+            vxTrajectory = vxTrajectory + dvxTrajectory;
+            vyTrajectory = vyTrajectory + dvyTrajectory;
             if (direction==-1){
-            x1 = x1 + (vx1 * dt);}
-            else {x1 = x1 - (vx1 * dt);};
-            y1 = y1 + (vy1 * dt);
+            xTrajectory = xTrajectory + (vxTrajectory * dt);}
+            else {xTrajectory = xTrajectory - (vxTrajectory * dt);};
+            yTrajectory = yTrajectory + (vyTrajectory * dt);
             g.setColor(Color.BLUE);
             if (n%60==0) {
-            g.fillOval((int)(x1-(direction+1)*50),(int)(800-y1),5,5);}
+            g.fillOval((int)(xTrajectory-(direction+1)*50),(int)(800-yTrajectory),5,5);}
             n+=1;
         };
     };
-    public void boom(Graphics g){
-        for (int i=1;i<20;i++){
-            g.setColor(Color.YELLOW);
-            g.fillOval((int) (x + 10-i), (int) (800 - y + 10-i),2*i,2*i);
 
-        }
-    };
 }

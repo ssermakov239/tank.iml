@@ -37,7 +37,7 @@ public class Enemyball {
         y0=y;
         vx0=vx;
         vy0=vy;
-        bulletImage=ImageIO.read(new File("src/bullets_png35596 (1).png"));
+        bulletImage=ImageIO.read(Enemyball.class.getResourceAsStream("bullets_png35596 (1).png"));
     };
     public void update(double a,double ymin,int direction){   //direction: 1//-1
         if (x==x0){

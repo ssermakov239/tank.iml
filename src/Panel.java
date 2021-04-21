@@ -6,7 +6,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class Panel extends JPanel implements MouseListener, MouseMotionListener {
@@ -16,7 +15,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
     private Plane plane = new Plane();
     public boolean frameClose =true;
     private int f = 5;
-    private int f1 = 3;
+    private int ifBulletIsDrawingAndUpdating = 3;
     private int ifTankShooting =0;
     private int EnemyBoom = 0;
     private int enemyBoomDirection = 0;
@@ -111,44 +110,44 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
         enemytank.x1 = -1;
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
-        dieImage = ImageIO.read(new File("src/image-created.png"));
-        winImage = ImageIO.read((new File("src/477-4772900_icon-you-win-graphic-design-hd-png-download.png")));
-        studyImage = ImageIO.read(new File("src/обучение01.png"));
-        study1Image = ImageIO.read(new File("src/инфа1.png"));
-        level1Image = ImageIO.read(new File("src/обучение01.png"));
-        level2Image = ImageIO.read(new File("src/ы (1).png"));
-        level1backgroundImage = ImageIO.read(new File("src/imgonline-com-ua-Resize-LdS3Mu9x4idZoD9.png"));
-        level2backgroundImage = ImageIO.read(new File(/*"src/scale_1200.png"*/"src/немецкий бомбардировщик.jpg"));
-        level3backgroundImage = ImageIO.read(new File("src/3background.png"));
-        level0background = ImageIO.read(new File("src/level0background.png"));
-        shootImage=ImageIO.read(new File("src/shootpng1.png"));
-        shootMouseMovedImage =ImageIO.read(new File("src/shootmousemoved2.png"));
-        shootMouseClickedImage=ImageIO.read(new File("src/shootmouseclicked2.png"));
-        showTrajectoryImage =ImageIO.read(new File("src/showtraektorypng1.png"));
-        showTrajectoryMouseMovedImage =ImageIO.read(new File("src/showtraektorymousemoved2.png"));
-        showTrajectoryMouseClickedImage =ImageIO.read(new File("src/showtraektorymouseclicked2.png"));
-        beginStudy=ImageIO.read(new File("src/beginstudy.png"));
-        beginStudyMouseMoved=ImageIO.read(new File("src/beginstudymousemoved.png"));
-        floor =ImageIO.read(new File("src/level0background0000.png"));
-        floor1=ImageIO.read(new File("src/level0background11111.png"));
-        finishStudy =ImageIO.read(new File("src/finishstudy.png"));
-        finishStudyMouseMoved=ImageIO.read(new File("src/finishstudymousemoved.png"));
-        GoTo2Level=ImageIO.read(new File("src/goto2level.png"));
-        GoTo2LevelMouseMoved=ImageIO.read(new File("src/goto2levelmousemoved.png"));
-        GoTo3Level=ImageIO.read(new File("src/goto3level.png"));
-        GoTo3LevelMouseMoved=ImageIO.read(new File("src/goto3levelmousemoved.png"));
-        KurskImage =ImageIO.read(new File("src/Курская битва.jpg"));
-        Leningrad=ImageIO.read(new File("src/Битва за Ленинград.jpg"));
-        Stalingrad=ImageIO.read(new File("src/Сталинградская битва 2.jpg"));
-        level3Image=ImageIO.read(new File("src/уровень 3 1.png"));
-        MapKursk=ImageIO.read(new File("src/карта ссср курск.jpg"));
-        MapLeningrad=ImageIO.read(new File("src/карта ссср ленинград.jpg"));
-        MapStalingrad=ImageIO.read(new File("src/карта ссср сталинград.jpg"));
-        FinalImage=ImageIO.read(new File("src/советский флаг над рейхстагом фото.jpg"));
-        Yesimage=ImageIO.read(new File("src/да.png"));
-        YesMouseMovedImage=ImageIO.read(new File("src/да1.png"));
-        NoImage=ImageIO.read(new File("src/нет.png"));
-        NoMouseMovedImage=ImageIO.read(new File("src/нет1.png"));
+        dieImage = ImageIO.read(Panel.class.getResourceAsStream("image-created.png"));
+        winImage = ImageIO.read((Panel.class.getResourceAsStream("477-4772900_icon-you-win-graphic-design-hd-png-download.png")));
+        studyImage = ImageIO.read(Panel.class.getResourceAsStream("обучение01.png"));
+        study1Image = ImageIO.read(Panel.class.getResourceAsStream("инфа1.png"));
+        level1Image = ImageIO.read(Panel.class.getResourceAsStream("обучение01.png"));
+        level2Image = ImageIO.read(Panel.class.getResourceAsStream("ы (1).png"));
+        level1backgroundImage = ImageIO.read(Panel.class.getResourceAsStream("imgonline-com-ua-Resize-LdS3Mu9x4idZoD9.png"));
+        level2backgroundImage = ImageIO.read(Panel.class.getResourceAsStream(/*"src/scale_1200.png"*/"немецкий бомбардировщик.jpg"));
+        level3backgroundImage = ImageIO.read(Panel.class.getResourceAsStream("3background.png"));
+        level0background = ImageIO.read(Panel.class.getResourceAsStream("level0background.png"));
+        shootImage=ImageIO.read(Panel.class.getResourceAsStream("shootpng1.png"));
+        shootMouseMovedImage =ImageIO.read(Panel.class.getResourceAsStream("shootmousemoved2.png"));
+        shootMouseClickedImage=ImageIO.read(Panel.class.getResourceAsStream("shootmouseclicked2.png"));
+        showTrajectoryImage =ImageIO.read(Panel.class.getResourceAsStream("showtraektorypng1.png"));
+        showTrajectoryMouseMovedImage =ImageIO.read(Panel.class.getResourceAsStream("showtraektorymousemoved2.png"));
+        showTrajectoryMouseClickedImage =ImageIO.read(Panel.class.getResourceAsStream("showtraektorymouseclicked2.png"));
+        beginStudy=ImageIO.read(Panel.class.getResourceAsStream("beginstudy.png"));
+        beginStudyMouseMoved=ImageIO.read(Panel.class.getResourceAsStream("beginstudymousemoved.png"));
+        floor =ImageIO.read(Panel.class.getResourceAsStream("level0background0000.png"));
+        floor1=ImageIO.read(Panel.class.getResourceAsStream("level0background11111.png"));
+        finishStudy =ImageIO.read(Panel.class.getResourceAsStream("finishstudy.png"));
+        finishStudyMouseMoved=ImageIO.read(Panel.class.getResourceAsStream("finishstudymousemoved.png"));
+        GoTo2Level=ImageIO.read(Panel.class.getResourceAsStream("goto2level.png"));
+        GoTo2LevelMouseMoved=ImageIO.read(Panel.class.getResourceAsStream("goto2levelmousemoved.png"));
+        GoTo3Level=ImageIO.read(Panel.class.getResourceAsStream("goto3level.png"));
+        GoTo3LevelMouseMoved=ImageIO.read(Panel.class.getResourceAsStream("goto3levelmousemoved.png"));
+        KurskImage =ImageIO.read(Panel.class.getResourceAsStream("Курская битва.jpg"));
+        Leningrad=ImageIO.read(Panel.class.getResourceAsStream("Битва за Ленинград.jpg"));
+        Stalingrad=ImageIO.read(Panel.class.getResourceAsStream("Сталинградская битва 2.jpg"));
+        level3Image=ImageIO.read(Panel.class.getResourceAsStream("уровень 3 1.png"));
+        MapKursk=ImageIO.read(Panel.class.getResourceAsStream("карта ссср курск.jpg"));
+        MapLeningrad=ImageIO.read(Panel.class.getResourceAsStream("карта ссср ленинград.jpg"));
+        MapStalingrad=ImageIO.read(Panel.class.getResourceAsStream("карта ссср сталинград.jpg"));
+        FinalImage=ImageIO.read(Panel.class.getResourceAsStream("советский флаг над рейхстагом фото.jpg"));
+        Yesimage=ImageIO.read(Panel.class.getResourceAsStream("да.png"));
+        YesMouseMovedImage=ImageIO.read(Panel.class.getResourceAsStream("да1.png"));
+        NoImage=ImageIO.read(Panel.class.getResourceAsStream("нет.png"));
+        NoMouseMovedImage=ImageIO.read(Panel.class.getResourceAsStream("нет1.png"));
     }
 
 
@@ -228,7 +227,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
 
                 if (f == 1) {
                     if (timeTrajectory >= 0) {
-                        ball.drawline(0.001, ball.y, ball.x, ball.y, ball.vx, ball.vy, g, -1);
+                        ball.drawline( ball.y, ball.x, ball.y, ball.vx, ball.vy, g, -1);
                         timeTrajectory -= deltaTime / 10.0;
                         try {
                             ball.initialize(ball.v, ball.angle, tank.x, (800 - tank.y));
@@ -244,7 +243,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
 
                 }
 
-                if (f1 == 1) {
+                if (ifBulletIsDrawingAndUpdating == 1) {
                     if (ball.y >= (750 - tank.y)) {
                         ball.draw(g, -1);
                         //System.out.println("jjj");
@@ -270,7 +269,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                             boomR = boomR + deltaTime / 30.0;
                         } else {
                             boomR = 0;
-                            f1 = 0;
+                            ifBulletIsDrawingAndUpdating = 0;
 
                         }
 
@@ -310,7 +309,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                     ball.angle = ball.angle - 1 / 1800.0 * Math.PI;
                 }
                 if (f == 1) {
-                    f1 = 0;
+                    ifBulletIsDrawingAndUpdating = 0;
                 }
 
                 //f = 0;
@@ -437,7 +436,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
 
                 if (f == 1) {
                     if (timeTrajectory >= 0) {
-                        ball.drawline(0.05, ball.y, ball.x, ball.y, ball.vx, ball.vy, g, ballDirection);
+                        ball.drawline( ball.y, ball.x, ball.y, ball.vx, ball.vy, g, ballDirection);
 
                         timeTrajectory -= deltaTime / 10.0;
                         try {
@@ -454,7 +453,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
 
                 }
 
-                if (f1 == 1) {
+                if (ifBulletIsDrawingAndUpdating == 1) {
                     if (ball.y >= (750 - tank.y)) {
                         ball.draw(g, ballDirection);
                         ball.update(deltaTime / 200.0, ball.y0, ballDirection);
@@ -484,7 +483,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                             boomR = boomR + deltaTime / 30.0;
                         } else {
                             boomR = 0;
-                            f1 = 0;
+                            ifBulletIsDrawingAndUpdating = 0;
                         }
 
                     }
@@ -527,7 +526,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                     ball.angle = ball.angle - 1 / 1800.0 * Math.PI;
                 }
                 if (f == 1) {
-                    f1 = 0;
+                    ifBulletIsDrawingAndUpdating = 0;
                 }
 
                 // f = 0;
@@ -621,7 +620,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
             g.setColor(Color.GRAY);
 
             g.drawImage(floor,0,720,1500,80,null);
-            plane.update(deltaTime / 70.0, 1);
+            plane.update(deltaTime / 70.0);
 
             if (plane.xstroke > 0) {
                 planeBoom = 1;
@@ -660,7 +659,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                     enemyBoomR = 0;
                     planeBoom = 0;
                     try {
-                        plane.bomb.initialize((plane.x + (plane.f + 1) * 60), plane.y, 30);
+                        plane.bomb.initialize((plane.x + (plane.direction + 1) * 60), plane.y, 30);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -689,7 +688,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
 
             if (f == 1) {
                 if (timeTrajectory >= 0) {
-                    ball.drawline(0.05, ball.y, ball.x, ball.y, ball.vx, ball.vy, g, -1);
+                    ball.drawline( ball.y, ball.x, ball.y, ball.vx, ball.vy, g, -1);
 
                     timeTrajectory -= deltaTime / 10.0;
                     try {
@@ -706,7 +705,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
 
             }
 
-            if (f1 == 1) {
+            if (ifBulletIsDrawingAndUpdating == 1) {
                 if (ball.y >= (750 - tank.y)) {
                     ball.draw(g, -1);
                     ball.update(deltaTime / 200.0, ball.y0, -1);
@@ -730,7 +729,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                         boomR = boomR + deltaTime / 30.0;
                     } else {
                         boomR = 0;
-                        f1 = 0;
+                        ifBulletIsDrawingAndUpdating = 0;
                     }
 
                 }
@@ -768,7 +767,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                 ball.angle = ball.angle - 1 / 1800.0 * Math.PI;
             }
             if (f == 1) {
-                f1 = 0;
+                ifBulletIsDrawingAndUpdating = 0;
             }
 
             //f = 0;
@@ -855,7 +854,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
             threeBegin += 1;
             if (f == 1) {
                 if (timeTrajectory >= 0) {
-                    ball.drawline(0.05, (ball.y + 100), ball.x, ball.y, ball.vx, ball.vy, g, -1);
+                    ball.drawline( (ball.y + 100), ball.x, ball.y, ball.vx, ball.vy, g, -1);
 
                     timeTrajectory -= deltaTime / 10.0;
                     try {
@@ -872,7 +871,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
 
             }
 
-            if (f1 == 1) {
+            if (ifBulletIsDrawingAndUpdating == 1) {
                 if ((ball.y >= (750 - tank.y + 120) || ball.vy > 0 || ball.x < 800 && ball.y >= (750 - tank.y))&&(ball.x<770||ball.y>200)) {
                     ball.draw(g, -1);
                     ball.update(deltaTime / 200.0, (750 - tank.y + 120), -1);
@@ -896,7 +895,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                         boomR = boomR + deltaTime / 30.0;
                     } else {
                         boomR = 0;
-                        f1 = 0;
+                        ifBulletIsDrawingAndUpdating = 0;
                     }
 
                 }
@@ -998,7 +997,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                 ball.angle = ball.angle - 1 / 1800.0 * Math.PI;
             }
             if (f == 1) {
-                f1 = 0;
+                ifBulletIsDrawingAndUpdating = 0;
             }
 
             if (plane.health > 0) {
@@ -1045,7 +1044,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                             enemyBoomR3 = 0;
                             planeBoom = 0;
                             try {
-                                plane.bomb.initialize((plane.x + (plane.f + 1) * 60), plane.y, 30);
+                                plane.bomb.initialize((plane.x + (plane.direction + 1) * 60), plane.y, 30);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -1096,7 +1095,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                             enemyBoomR3 = 0;
                             planeBoom = 0;
                             try {
-                                plane.bomb.initialize((plane.x + (plane.f + 1) * 60), plane.y, 30);
+                                plane.bomb.initialize((plane.x + (plane.direction + 1) * 60), plane.y, 30);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -1109,7 +1108,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
 
                 }
                 plane.drawHealth(g);
-                plane.update(deltaTime / 70.0, 1);
+                plane.update(deltaTime / 70.0);
             }
             if (plane.xstroke >= tank.x && plane.xstroke <= (tank.x + 120)) {
                 tank.health -= 1;
@@ -1213,7 +1212,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
             if (ifTankShooting ==0) {
                 new Thread(() -> new TankFires().playSound("bip.wav")).start();
                 ifTankShooting =1;
-                f1 = 1;
+                ifBulletIsDrawingAndUpdating = 1;
                 f = -1;
                 boomR = 0;
                 try {

@@ -2,6 +2,8 @@ import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -13,7 +15,7 @@ import javax.sound.sampled.SourceDataLine;
 public class TankGoes {
 
     private final int BUFFER_SIZE = 128000;
-    private File soundFile;
+    private URL soundFile;
     private AudioInputStream audioStream;
     private AudioFormat audioFormat;
     private SourceDataLine sourceLine;
@@ -27,7 +29,7 @@ public class TankGoes {
         String strFilename = filename;
 
         try {
-            soundFile = new File("src/soundtankgo.wav");
+            soundFile = TankGoes.class.getResource("soundtankgo.wav");
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);

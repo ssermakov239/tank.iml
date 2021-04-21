@@ -1,8 +1,10 @@
 
     import java.io.File;
 import java.io.IOException;
+    import java.io.InputStream;
+    import java.net.URL;
 
-import javax.sound.sampled.AudioFormat;
+    import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
@@ -12,7 +14,7 @@ import javax.sound.sampled.SourceDataLine;
     public class TankFires {
 
         private final int BUFFER_SIZE = 128000;
-        private File soundFile;
+        private URL soundFile;
         private AudioInputStream audioStream;
         private AudioFormat audioFormat;
         private SourceDataLine sourceLine;
@@ -25,7 +27,7 @@ import javax.sound.sampled.SourceDataLine;
             String strFilename = filename;
 
             try {
-                soundFile = new File("src/14402638_tank-firin.wav");
+                soundFile = TankFires.class.getResource("14402638_tank-firin.wav");
             } catch (Exception e) {
                 e.printStackTrace();
                 System.exit(1);
