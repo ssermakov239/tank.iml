@@ -288,7 +288,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                     tankGo =1;
                 new Thread(() -> {
                     sound1.bool=1;
-                    sound1.playSound("h");
+                    sound1.playSound();
                 }).start();
                 tankGof =1;}
                 if (moveRight ==0&& moveLeft ==0){
@@ -499,7 +499,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                     tankGo =1;
                     new Thread(() -> {
                         sound1.bool=1;
-                        sound1.playSound("h");
+                        sound1.playSound();
                     }).start();
                     tankGof =1;}
                 if (moveRight ==0&& moveLeft ==0){
@@ -747,7 +747,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                     tankGo =1;
                     new Thread(() -> {
                         sound1.bool=1;
-                        sound1.playSound("h");
+                        sound1.playSound();
                     }).start();
                     tankGof =1;}
                 if (moveRight ==0&& moveLeft ==0){
@@ -913,7 +913,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                 tankGo =1;
                 new Thread(() -> {
                     sound1.bool=1;
-                    sound1.playSound("h");
+                    sound1.playSound();
                 }).start();
                 tankGof =1;}
             if (moveRight ==0&& moveLeft ==0){

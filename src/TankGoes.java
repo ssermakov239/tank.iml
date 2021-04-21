@@ -24,9 +24,7 @@ public class TankGoes {
     /*
      * @param filename src/14402638_tank-firin.wav
      */
-    public void playSound(String filename){
-
-        String strFilename = filename;
+    public void playSound(){
 
         try {
             soundFile = TankGoes.class.getResource("soundtankgo.wav");
