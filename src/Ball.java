@@ -91,39 +91,31 @@ public class Ball {
         g.drawImage(op.filter(bulletImage, null), (int)(x-(direction+1)*50), (int)(800-y),50,37, null);
         //g.fillOval((int)(x),(int)(800-y),20,20);
     };
-    public void drawline (double a,double ymin,double b,double c,double d,double e, Graphics g,int direction){
-         double x1=b;
-        double y1=c;
-        double vx1=d;
-        double vy1=e;
-        double dvx1;
-        double dvy1;
+    public void drawline (double ymin,double xTrajectory,double yTrajectory,double vxTrajectory,double vyTrajectory, Graphics g,int direction){
+        double dvxTrajectory;
+        double dvyTrajectory;
         dt=0.04;
         g.setColor(Color.BLUE);
         int n=0;
-        while (vy1>=0||y1>=ymin) {
-            if (y1<860){
-            dvx1=-1*dt/(m*5.0)*k*Math.pow((1-3.65*Math.pow(10,-3.5)*y1),2.5)*Math.sqrt(vx1*vx1+vy1*vy1)*vx1;
-            dvy1=-1*dt/(m*5.0)*(m*G+k*Math.pow((1-3.65*Math.pow(10,-3.5)*y1),2.5)*Math.sqrt(vx1*vx1+vy1*vy1)*vy1);}
-            else {dvx1=0;
-            dvy1=-G*dt/5.0;}
-            vx1 = vx1 + dvx1;
-            vy1 = vy1 + dvy1;
+        while (vyTrajectory>=0||yTrajectory>=ymin) {
+            if (yTrajectory<860){
+                dvxTrajectory=-1*dt/(m*5.0)*k*Math.pow((1-3.65*Math.pow(10,-3.5)*yTrajectory),2.5)*Math.sqrt(vxTrajectory*vxTrajectory+vyTrajectory*vyTrajectory)*vxTrajectory;
+                dvyTrajectory=-1*dt/(m*5.0)*(m*G+k*Math.pow((1-3.65*Math.pow(10,-3.5)*yTrajectory),2.5)*Math.sqrt(vxTrajectory*vxTrajectory+vyTrajectory*vyTrajectory)*vyTrajectory);}
+            else {dvxTrajectory=0;
+                dvyTrajectory=-G*dt/5.0;}
+            vxTrajectory = vxTrajectory + dvxTrajectory;
+            vyTrajectory = vyTrajectory + dvyTrajectory;
             if (direction==-1){
-            x1 = x1 + (vx1 * dt);}
-            else {x1 = x1 - (vx1 * dt);};
-            y1 = y1 + (vy1 * dt);
+                xTrajectory = xTrajectory + (vxTrajectory * dt);}
+            else {xTrajectory = xTrajectory - (vxTrajectory * dt);};
+            yTrajectory = yTrajectory + (vyTrajectory * dt);
             g.setColor(Color.BLUE);
             if (n%60==0) {
-            g.fillOval((int)(x1-(direction+1)*50),(int)(800-y1),5,5);}
+                g.fillOval((int)(xTrajectory-(direction+1)*50),(int)(800-yTrajectory),5,5);}
             n+=1;
         };
     };
-    public void boom(Graphics g){
-        for (int i=1;i<20;i++){
-            g.setColor(Color.YELLOW);
-            g.fillOval((int) (x + 10-i), (int) (800 - y + 10-i),2*i,2*i);
 
-        }
-    };
+
+
 }

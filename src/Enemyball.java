@@ -22,7 +22,7 @@ public class Enemyball {
     private double G =10;
     public double m = 1;
     public double k =0.2;
-    private int f=0;
+    private int ifXstroke =0;
     BufferedImage bulletImage;
 
     public Enemyball(){};
@@ -47,10 +47,11 @@ public class Enemyball {
         vx=vx0*Math.exp(-k*dt/m);
         vy=vy0*Math.exp(-k*dt/m)-G*m/k*(1-Math.exp(-k*dt/m));
         dt=dt+a;
-        if (Math.abs(y-ymin)<2.5&&dt!=a&&f==0){
+        if (Math.abs(y-ymin)<2.5&&dt!=a&& ifXstroke ==0){
             xstroke=x;
-            f=1;
-        } else {xstroke=-100000; if (Math.abs(y-ymin)>2.5) {f=0;}};
+            ifXstroke =1;
+        } else {xstroke=-100000; if (Math.abs(y-ymin)>2.5) {
+            ifXstroke =0;}};
 
 
         //System.out.println(y+" "+y0);

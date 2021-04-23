@@ -15,10 +15,10 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
     private Enemytank enemytank = new Enemytank();
     private Plane plane = new Plane();
     public boolean frameClose =true;
-    private int f = 5;
-    private int f1 = 3;
+    private int canIDrawTrajectory = 5;
+    private int canBallBeDrawingAndUpdating = 3;
     private int ifTankShooting =0;
-    private int EnemyBoom = 0;
+    private int enemyBoom = 0;
     private int enemyBoomDirection = 0;
     private int planeBoomDirection = 0;
     private double enemyBoomR3 = 0;
@@ -46,7 +46,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
     private int shootButtonMoved =0;
     private int yesMouseMoved=0;
     private int noMouseMoved=0;
-    private int f3=1;
+    private int canIShowTrajectory =1;
     private int studyF =0;
     private int finishStudyF =0;
     private int goto2level=0;
@@ -182,7 +182,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                 timeLevel1 -= deltaTime / 6.5;
                 enemytank.enemyball.vy = -1;
                 enemytank.enemyball.y = -1;
-                if (Math.abs(timeLevel1-5)<2.0){
+                if (Math.abs(timeLevel1-1)<1.0){
                     new Thread(() -> {
                         enemyTankGo.playSound("h");
                     }).start();
@@ -199,18 +199,21 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                 }
                 if (shootButtonMoved ==2){
                     g.drawImage(shootMouseClickedImage,50,15,110,40,null);
-                    f3=1;
+                    canIShowTrajectory =1;
                 }
 
-                if (showTrajectoryButtonMoved ==1&&f3==1){
+                if (showTrajectoryButtonMoved ==1&& canIShowTrajectory ==1){
                     g.drawImage(showTrajectoryMouseMovedImage,50,58,180,40,null);
                 } else
-                if (f3==0){
+                if (canIShowTrajectory ==0){
 
                     g.drawImage(showTrajectoryMouseClickedImage,50,58,180,40,null);
-                } else if (timeTrajectory ==0){f3=0;}
-                if (timeTrajectory ==400){f3=0;}
-                if (timeTrajectory ==0){f3=1;}
+                } else if (timeTrajectory ==0){
+                    canIShowTrajectory =0;}
+                if (timeTrajectory ==400){
+                    canIShowTrajectory =0;}
+                if (timeTrajectory ==0){
+                    canIShowTrajectory =1;}
                 if (finishStudyF ==1){
                     g.drawImage(finishStudyMouseMoved,50,150,187,40,null);
                 }
@@ -226,9 +229,9 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                 //g.fillRect(0, 720, 1500, 80);
                 g.drawImage(floor,0, 720, 1500, 80,null);
 
-                if (f == 1) {
+                if (canIDrawTrajectory == 1) {
                     if (timeTrajectory >= 0) {
-                        ball.drawline(0.001, ball.y, ball.x, ball.y, ball.vx, ball.vy, g, -1);
+                        ball.drawline( ball.y, ball.x, ball.y, ball.vx, ball.vy, g, -1);
                         timeTrajectory -= deltaTime / 10.0;
                         try {
                             ball.initialize(ball.v, ball.angle, tank.x, (800 - tank.y));
@@ -239,12 +242,12 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                     }
 
                     if (timeTrajectory == -1) {
-                        f = -1;
+                        canIDrawTrajectory = -1;
                     }
 
                 }
 
-                if (f1 == 1) {
+                if (canBallBeDrawingAndUpdating == 1) {
                     if (ball.y >= (750 - tank.y)) {
                         ball.draw(g, -1);
                         //System.out.println("jjj");
@@ -270,7 +273,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                             boomR = boomR + deltaTime / 30.0;
                         } else {
                             boomR = 0;
-                            f1 = 0;
+                            canBallBeDrawingAndUpdating = 0;
 
                         }
 
@@ -309,8 +312,8 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                 } else if (angleMinus == 1&&ball.angle>=0/180.0*3.1416) {
                     ball.angle = ball.angle - 1 / 1800.0 * Math.PI;
                 }
-                if (f == 1) {
-                    f1 = 0;
+                if (canIDrawTrajectory == 1) {
+                    canBallBeDrawingAndUpdating = 0;
                 }
 
                 //f = 0;
@@ -347,18 +350,21 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                 }
                 if (shootButtonMoved ==2){
                     g.drawImage(shootMouseClickedImage,50,15,110,40,null);
-                    f3=1;
+                    canIShowTrajectory =1;
                 }
 
 
-                if (showTrajectoryButtonMoved ==1&&f3==1){
+                if (showTrajectoryButtonMoved ==1&& canIShowTrajectory ==1){
                     g.drawImage(showTrajectoryMouseMovedImage,50,58,180,40,null);
                 } else
-                if (f3==0){
+                if (canIShowTrajectory ==0){
                     g.drawImage(showTrajectoryMouseClickedImage,50,58,180,40,null);
-                } else if (timeTrajectory ==0){f3=0;}
-                if (timeTrajectory ==400){f3=0;}
-                if (timeTrajectory ==0){f3=1;}
+                } else if (timeTrajectory ==0){
+                    canIShowTrajectory =0;}
+                if (timeTrajectory ==400){
+                    canIShowTrajectory =0;}
+                if (timeTrajectory ==0){
+                    canIShowTrajectory =1;}
 
 
 
@@ -389,12 +395,12 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
 
 
                 if (enemytank.enemyball.xstroke > 0) {
-                    EnemyBoom = 1;
+                    enemyBoom = 1;
                     enemytank.enemyball.xstroke = -10000;
                     enemyBoomDirection = enemyBallDirection;
                 }
 
-                if (EnemyBoom == 1) {
+                if (enemyBoom == 1) {
                     if (enemyBoomR < 10) {
                         g.setColor(Color.RED);
                     } else if (enemyBoomR < 20) {
@@ -412,13 +418,13 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                         enemyBoomR = enemyBoomR + deltaTime / 30.0;
                     } else {
                         enemyBoomR = 0;
-                        EnemyBoom = 0;
+                        enemyBoom = 0;
                     }
 
                 }
 
                 try {
-                    if (EnemyBoom == 0) {
+                    if (enemyBoom == 0&&enemytank.health>0) {
                         enemytank.shoot(deltaTime / 200.0, tank.x, 82, g, enemyBallDirection);
                     }
                 } catch (IOException e) {
@@ -435,9 +441,9 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                     enemytank.move(deltaTime / 20.0, tank.x, 1);
                 }
 
-                if (f == 1) {
+                if (canIDrawTrajectory == 1) {
                     if (timeTrajectory >= 0) {
-                        ball.drawline(0.05, ball.y, ball.x, ball.y, ball.vx, ball.vy, g, ballDirection);
+                        ball.drawline( ball.y, ball.x, ball.y, ball.vx, ball.vy, g, ballDirection);
 
                         timeTrajectory -= deltaTime / 10.0;
                         try {
@@ -449,12 +455,12 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                     }
 
                     if (timeTrajectory == -1) {
-                        f = -1;
+                        canIDrawTrajectory = -1;
                     }
 
                 }
 
-                if (f1 == 1) {
+                if (canBallBeDrawingAndUpdating == 1) {
                     if (ball.y >= (750 - tank.y)) {
                         ball.draw(g, ballDirection);
                         ball.update(deltaTime / 200.0, ball.y0, ballDirection);
@@ -484,7 +490,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                             boomR = boomR + deltaTime / 30.0;
                         } else {
                             boomR = 0;
-                            f1 = 0;
+                            canBallBeDrawingAndUpdating = 0;
                         }
 
                     }
@@ -526,20 +532,25 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                 } else if (angleMinus == 1&&ball.angle>=0/180.0*3.1416) {
                     ball.angle = ball.angle - 1 / 1800.0 * Math.PI;
                 }
-                if (f == 1) {
-                    f1 = 0;
+                if (canIDrawTrajectory == 1) {
+                    canBallBeDrawingAndUpdating = 0;
                 }
 
                 // f = 0;
 
                 if (tank.health <= 0 && time < 100) {
                     g.drawImage(dieImage, 0, 0, 1500, 800, null);
+                    enemyTankGo.bool=0;
+                    enemytank.health = 0;
+                    timeWin=10000;
                     time += deltaTime / 10.0;
                     if (Math.abs(time - 99)<2.0) {
                         tank.health = 10;
                         enemytank.health = 2;
                         ifTankShooting =0;
                         time = 0;
+                        enemyTankGo.bool=1;
+                        timeWin=0;
                     }
                 }
 
@@ -547,7 +558,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                     g.drawImage(winImage, 0, 0, 1500, 800, null);
                     timeWin += deltaTime / 10.0;
                     enemyTankGo.bool=0;
-                    if (Math.abs(timeWin - 99)<2.0) {
+                    if (Math.abs(timeWin - 99)<2.5) {
                         tank.health = 10;
                         enemytank.health = 2;
                         timeWin = 0;
@@ -598,20 +609,23 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
             if (shootButtonMoved ==2){
 
                 g.drawImage(shootMouseClickedImage,50,15,110,40,null);
-                f3=1;
+                canIShowTrajectory =1;
             }
 
 
-            if (showTrajectoryButtonMoved ==1&&f3==1){
+            if (showTrajectoryButtonMoved ==1&& canIShowTrajectory ==1){
 
                 g.drawImage(showTrajectoryMouseMovedImage,50,58,180,40,null);
             } else
-            if (f3==0){
+            if (canIShowTrajectory ==0){
 
                 g.drawImage(showTrajectoryMouseClickedImage,50,58,180,40,null);
-            } else if (timeTrajectory ==0){f3=0;}
-            if (timeTrajectory ==400){f3=0;}
-            if (timeTrajectory ==0){f3=1;}
+            } else if (timeTrajectory ==0){
+                canIShowTrajectory =0;}
+            if (timeTrajectory ==400){
+                canIShowTrajectory =0;}
+            if (timeTrajectory ==0){
+                canIShowTrajectory =1;}
 
 
 
@@ -621,7 +635,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
             g.setColor(Color.GRAY);
 
             g.drawImage(floor,0,720,1500,80,null);
-            plane.update(deltaTime / 70.0, 1);
+            plane.update(deltaTime / 70.0);
 
             if (plane.xstroke > 0) {
                 planeBoom = 1;
@@ -660,7 +674,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                     enemyBoomR = 0;
                     planeBoom = 0;
                     try {
-                        plane.bomb.initialize((plane.x + (plane.f + 1) * 60), plane.y, 30);
+                        plane.bomb.initialize((plane.x + (plane.direction + 1) * 60), plane.y, 30);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -687,9 +701,9 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                 planeStroke = 0;
             }
 
-            if (f == 1) {
+            if (canIDrawTrajectory == 1) {
                 if (timeTrajectory >= 0) {
-                    ball.drawline(0.05, ball.y, ball.x, ball.y, ball.vx, ball.vy, g, -1);
+                    ball.drawline( ball.y, ball.x, ball.y, ball.vx, ball.vy, g, -1);
 
                     timeTrajectory -= deltaTime / 10.0;
                     try {
@@ -701,12 +715,12 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                 }
 
                 if (timeTrajectory == -1) {
-                    f = -1;
+                    canIDrawTrajectory = -1;
                 }
 
             }
 
-            if (f1 == 1) {
+            if (canBallBeDrawingAndUpdating == 1) {
                 if (ball.y >= (750 - tank.y)) {
                     ball.draw(g, -1);
                     ball.update(deltaTime / 200.0, ball.y0, -1);
@@ -730,7 +744,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                         boomR = boomR + deltaTime / 30.0;
                     } else {
                         boomR = 0;
-                        f1 = 0;
+                        canBallBeDrawingAndUpdating = 0;
                     }
 
                 }
@@ -767,8 +781,8 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
             } else if (angleMinus == 1&&ball.angle>=0/180.0*3.1416) {
                 ball.angle = ball.angle - 1 / 1800.0 * Math.PI;
             }
-            if (f == 1) {
-                f1 = 0;
+            if (canIDrawTrajectory == 1) {
+                canBallBeDrawingAndUpdating = 0;
             }
 
             //f = 0;
@@ -814,20 +828,23 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
             if (shootButtonMoved ==2){
 
                 g.drawImage(shootMouseClickedImage,50,15,110,40,null);
-                f3=1;
+                canIShowTrajectory =1;
             }
 
 
-            if (showTrajectoryButtonMoved ==1&&f3==1){
+            if (showTrajectoryButtonMoved ==1&& canIShowTrajectory ==1){
 
                 g.drawImage(showTrajectoryMouseMovedImage,50,58,180,40,null);
             } else
-            if (f3==0){
+            if (canIShowTrajectory ==0){
 
                 g.drawImage(showTrajectoryMouseClickedImage,50,58,180,40,null);
-            } else if (timeTrajectory ==0){f3=0;}
-            if (timeTrajectory ==400){f3=0;}
-            if (timeTrajectory ==0){f3=1;}
+            } else if (timeTrajectory ==0){
+                canIShowTrajectory =0;}
+            if (timeTrajectory ==400){
+                canIShowTrajectory =0;}
+            if (timeTrajectory ==0){
+                canIShowTrajectory =1;}
 
 
 
@@ -853,9 +870,9 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
             }
 
             threeBegin += 1;
-            if (f == 1) {
+            if (canIDrawTrajectory == 1) {
                 if (timeTrajectory >= 0) {
-                    ball.drawline(0.05, (ball.y + 100), ball.x, ball.y, ball.vx, ball.vy, g, -1);
+                    ball.drawline( (ball.y + 100), ball.x, ball.y, ball.vx, ball.vy, g, -1);
 
                     timeTrajectory -= deltaTime / 10.0;
                     try {
@@ -867,12 +884,12 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                 }
 
                 if (timeTrajectory == -1) {
-                    f = -1;
+                    canIDrawTrajectory = -1;
                 }
 
             }
 
-            if (f1 == 1) {
+            if (canBallBeDrawingAndUpdating == 1) {
                 if ((ball.y >= (750 - tank.y + 120) || ball.vy > 0 || ball.x < 800 && ball.y >= (750 - tank.y))&&(ball.x<770||ball.y>200)) {
                     ball.draw(g, -1);
                     ball.update(deltaTime / 200.0, (750 - tank.y + 120), -1);
@@ -896,7 +913,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                         boomR = boomR + deltaTime / 30.0;
                     } else {
                         boomR = 0;
-                        f1 = 0;
+                        canBallBeDrawingAndUpdating = 0;
                     }
 
                 }
@@ -940,12 +957,12 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                 }
 
                 if (enemytank.enemyball.xstroke > 0) {
-                    EnemyBoom = 1;
+                    enemyBoom = 1;
                     enemytank.enemyball.xstroke = -10000;
                     enemyBoomDirection = enemyBallDirection;
                 }
 
-                if (EnemyBoom == 1) {
+                if (enemyBoom == 1) {
                     if (enemyBoomR < 10) {
                         g.setColor(Color.RED);
                     } else if (enemyBoomR < 20) {
@@ -963,13 +980,13 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                         enemyBoomR = enemyBoomR + deltaTime / 30.0;
                     } else {
                         enemyBoomR = 0;
-                        EnemyBoom = 0;
+                        enemyBoom = 0;
                     }
 
                 }
 
                 try {
-                    if (EnemyBoom == 0) {
+                    if (enemyBoom == 0) {
                         enemytank.shoot(deltaTime / 200.0, tank.x, 800 - tank.y - 60, g, enemyBallDirection);
                     }
                 } catch (IOException e) {
@@ -997,8 +1014,8 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
             } else if (angleMinus == 1&&ball.angle>=0/180.0*3.1416) {
                 ball.angle = ball.angle - 1 / 1800.0 * Math.PI;
             }
-            if (f == 1) {
-                f1 = 0;
+            if (canIDrawTrajectory == 1) {
+                canBallBeDrawingAndUpdating = 0;
             }
 
             if (plane.health > 0) {
@@ -1045,7 +1062,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                             enemyBoomR3 = 0;
                             planeBoom = 0;
                             try {
-                                plane.bomb.initialize((plane.x + (plane.f + 1) * 60), plane.y, 30);
+                                plane.bomb.initialize((plane.x + (plane.direction + 1) * 60), plane.y, 30);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -1096,7 +1113,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                             enemyBoomR3 = 0;
                             planeBoom = 0;
                             try {
-                                plane.bomb.initialize((plane.x + (plane.f + 1) * 60), plane.y, 30);
+                                plane.bomb.initialize((plane.x + (plane.direction + 1) * 60), plane.y, 30);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -1109,7 +1126,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
 
                 }
                 plane.drawHealth(g);
-                plane.update(deltaTime / 70.0, 1);
+                plane.update(deltaTime / 70.0);
             }
             if (plane.xstroke >= tank.x && plane.xstroke <= (tank.x + 120)) {
                 tank.health -= 1;
@@ -1213,8 +1230,8 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
             if (ifTankShooting ==0) {
                 new Thread(() -> new TankFires().playSound("bip.wav")).start();
                 ifTankShooting =1;
-                f1 = 1;
-                f = -1;
+                canBallBeDrawingAndUpdating = 1;
+                canIDrawTrajectory = -1;
                 boomR = 0;
                 try {
                     ball.initialize(ball.v, ball.angle, tank.x, (800 - tank.y));
@@ -1299,7 +1316,7 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
                 }
 
                 timeTrajectory = 400;
-                f = 1;
+                canIDrawTrajectory = 1;
             }
         }
 

@@ -52,13 +52,13 @@ public class Enemytank {
             g.drawImage(op.filter(gun, null), (int)(x-7+25+(74-28*(1-Math.cos(3.1416-angleInRadians)))), (int)(800-43-(y-20+20*Math.sin(3.1416-angleInRadians)+10*Math.sin(3.1416-angleInRadians)*Math.sin(3.1416-angleInRadians))),-80,80, null);
         }
     };
-    public void move(double dt,double a,int direction){
+    public void move(double dt,double xTank,int direction){
         if (direction==-1){
-        while (x1<a||x1>1500) {
+        while (x1<xTank||x1>1500) {
             x1 = (int) (x - 300 + Math.random() * 600);
         };}
         else if (direction==1){
-            while (x1>a||x1<0) {
+            while (x1>xTank||x1<0) {
                 x1 = (int) (x - 300 + Math.random() * 600);
             };
         };
@@ -68,14 +68,14 @@ public class Enemytank {
         } else {x=x+1.5*dt; };
         } else{x1=-1;};
     };
-    public void shoot(double dt,double a,double ymin,Graphics g,int direction) throws IOException {   // a=tank.x
+    public void shoot(double dt,double xTank,double ymin,Graphics g,int direction) throws IOException {
         if (enemyball.vy<0&&enemyball.y<=ymin) {
             double angle = Math.PI/7+Math.random()*Math.PI/6;
             double v=0;
             if (direction==-1) {
-                v = Math.abs(x - a) * enemyball.k / enemyball.m / Math.cos(angle);
+                v = Math.abs(x - xTank) * enemyball.k / enemyball.m / Math.cos(angle);
             } else if (direction==1){
-                v = Math.abs(a-x-5/*+90*/) * enemyball.k / enemyball.m / Math.cos(angle);
+                v = Math.abs(xTank-x-5/*+90*/) * enemyball.k / enemyball.m / Math.cos(angle);
             }
             enemyball.initialize(v,angle,(x+(direction+1)*60),y);
             new Thread(() -> {

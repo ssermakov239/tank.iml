@@ -14,10 +14,6 @@ public class Main {
         frame.setVisible(true);
         while (panel.frameClose) {
             frame.repaint();
-           // new TankFires().playSound("bip.wav");
-          //  if (panel.f==0){
-            //Thread.sleep(4);
-
 
         }
         System.exit(1);
