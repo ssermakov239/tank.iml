@@ -1,7 +1,6 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class Plane {
@@ -18,7 +17,7 @@ public class Plane {
     public Bomb bomb=new Bomb();
     BufferedImage planeImage;
     public Plane() throws IOException {
-        this.planeImage= ImageIO.read(new File("src/trying-to-find-a-luftwaffe-pilot-axis-history-forum-luftwaffe-png-1114_450-min.png"));
+        this.planeImage= ImageIO.read(Plane.class.getResourceAsStream("trying-to-find-a-luftwaffe-pilot-axis-history-forum-luftwaffe-png-1114_450-min.png"));
         bomb.initialize(1,720,v);
     };
     public void initialize(double xx,double yy,double tt){

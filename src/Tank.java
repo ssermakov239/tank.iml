@@ -14,9 +14,9 @@ public class Tank {
     BufferedImage tankwithoutgun;
     BufferedImage gun;
     public Tank() throws IOException {
-        tankimage= ImageIO.read(new File("src/tank_PNG1295.png"));
-        tankwithoutgun=ImageIO.read(new File("src/soviet tank without gun 1.png"));
-        gun=ImageIO.read(new File("src/дуло1.png"));
+        tankimage= ImageIO.read(Tank.class.getResourceAsStream("tank_PNG1295.png"));
+        tankwithoutgun=ImageIO.read(Tank.class.getResourceAsStream("soviet tank without gun 1.png"));
+        gun=ImageIO.read(Tank.class.getResourceAsStream("дуло1.png"));
     };
     public void initialize(int a,int b){
         x=a;

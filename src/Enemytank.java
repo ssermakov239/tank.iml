@@ -16,9 +16,9 @@ public class Enemytank {
     BufferedImage tankwithoutgun;
     BufferedImage gun;
     public Enemytank() throws IOException {
-        tankimage= ImageIO.read(new File("src/tank_PNG1320.png"));
-        tankwithoutgun=ImageIO.read(new File("src/немецкий танк без пушки 11.png"));
-        gun=ImageIO.read(new File("src/немецкий танк пушка 1.png"));
+        tankimage= ImageIO.read(Enemytank.class.getResourceAsStream("tank_PNG1320.png"));
+        tankwithoutgun=ImageIO.read(Enemytank.class.getResourceAsStream("немецкий танк без пушки 11.png"));
+        gun=ImageIO.read(Enemytank.class.getResourceAsStream("немецкий танк пушка 1.png"));
         enemyball.initialize(1,1,x,y);
     };
     public void initialize(int a,int b){

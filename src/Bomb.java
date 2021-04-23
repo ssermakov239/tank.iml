@@ -26,7 +26,7 @@ public class Bomb {
         y0=y;
         vx0=vx;
         vy=0;
-        bombImage= ImageIO.read(new File("src/ищьи-png.png"));
+        bombImage= ImageIO.read(Bomb.class.getResourceAsStream("ищьи-png.png"));
     };
     public void draw(Graphics g){
         //g.setColor(Color.RED);
